@@ -1,0 +1,11 @@
+{
+  "name": "best-job-agent",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.12.3",
+  "scripts": {
+    "eval": "pnpm --filter @best-job-agent/eval eval",
+    "eval:run": "pnpm --filter @best-job-agent/eval eval:run",
+    "eval:report": "pnpm --filter @best-job-agent/eval eval:report"
+  }
+}

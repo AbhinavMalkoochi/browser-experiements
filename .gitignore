@@ -1,0 +1,17 @@
+node_modules/
+.env
+*.log
+dist/
+.turbo/
+.next/
+.DS_Store
+# eval run artifacts — keep structure, ignore giant per-run blobs
+packages/eval/results/**/runs/**
+packages/eval/results/**/*.png
+packages/eval/results/**/*.mp4
+packages/eval/results/**/*.har
+packages/eval/.playwright/
+packages/eval/.cache/
+# but keep summary + report
+!packages/eval/results/**/summary.json
+!packages/eval/results/**/report.html

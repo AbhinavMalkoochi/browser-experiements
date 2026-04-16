@@ -1,0 +1,30 @@
+{
+  "name": "@best-job-agent/eval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "tsx src/cli.ts",
+    "eval:run": "tsx src/cli.ts run",
+    "eval:report": "tsx src/cli.ts report",
+    "eval:list": "tsx src/cli.ts list",
+    "resume:gen": "tsx src/scripts/generate-resume.ts",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "^2.3.0",
+    "dotenv": "^16.4.5",
+    "openai": "^4.75.0",
+    "pdfkit": "^0.15.1",
+    "playwright": "^1.48.0",
+    "sharp": "^0.33.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.6",
+    "@types/pdfkit": "^0.13.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
