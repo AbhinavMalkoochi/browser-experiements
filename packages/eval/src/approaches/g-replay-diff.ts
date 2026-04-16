@@ -2,8 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, executeActions, profileToYaml, snapshotWithRetry, type DslOutput } from './shared.js';
-import { formatAx, diffSnapshots } from '../core/ax.js';
+import { ACTION_DSL_SCHEMA, checkReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
+import { formatAx } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
 
@@ -77,13 +77,21 @@ export const approachG: Approach = {
     let readyToSubmit = false;
     let stagnation = 0;
     let lastHash = '';
+    const history: ActionHistoryEntry[] = [];
 
     while (steps < ctx.maxSteps) {
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
-      if (snap.structuralHash === lastHash) stagnation++; else stagnation = 0;
-      lastHash = snap.structuralHash;
-      if (stagnation >= 4) break;
+      if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
+      lastHash = snap.behaviorHash;
+      if (stagnation >= 3) break;
+
+      const readyCheck = checkReadyToSubmit(snap);
+      if (readyCheck.ready) {
+        readyToSubmit = true;
+        ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });
+        return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      }
 
       // Try replay first
       const prior = cached?.steps[steps - 1];
@@ -120,13 +128,25 @@ export const approachG: Approach = {
         }
       }
 
-      // Full fallback: same as approach B.
       if (!actions) {
         const out = await chat<DslOutput>({
           model: ENV.EXECUTOR_MODEL,
           messages: [
-            { role: 'system', content: 'Form-filling agent. Use refs from snapshot. Uploads use value:"resume". Emit done when form filled + submit visible; never submit.' },
-            { role: 'user', content: [`GOAL: ${ctx.task.goal}`, '', 'PROFILE:', profileYaml, '', 'SNAPSHOT:', formatAx(snap, 140)].join('\n') },
+            { role: 'system', content: 'Form-filling agent. Use numeric refs. Skip FILLED fields. Uploads use value:"resume". Emit done when form filled + submit visible; never submit.' },
+            {
+              role: 'user',
+              content: [
+                `GOAL: ${ctx.task.goal}`,
+                '',
+                'PROFILE:',
+                profileYaml,
+                '',
+                formatActionHistory(history),
+                '',
+                'SNAPSHOT:',
+                formatAx(snap, 140),
+              ].join('\n'),
+            },
           ],
           jsonSchema: { name: 'AgentStep', schema: ACTION_DSL_SCHEMA, strict: true },
           maxTokens: 700,
@@ -147,7 +167,7 @@ export const approachG: Approach = {
       });
       recorded.push({ structuralHash: snap.structuralHash, actions: recActions });
 
-      const res = await executeActions(ctx, snap, actions, steps);
+      const res = await executeActions(ctx, snap, actions, steps, history);
       executed += res.executed;
       if (res.terminal === 'done') {
         readyToSubmit = true;

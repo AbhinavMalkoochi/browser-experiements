@@ -1,5 +1,5 @@
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { executeActions, profileToYaml, snapshotWithRetry } from './shared.js';
+import { checkReadyToSubmit, executeActions, profileToYaml, snapshotWithRetry } from './shared.js';
 import { formatAx, diffSnapshots } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
@@ -84,8 +84,9 @@ const SYSTEM = `You are a form-filling compiler. Input: a page's accessibility s
 Output: a *complete* FormSpec for this page.
 
 Rules:
-- Use numbered refs from the snapshot.
-- Include EVERY required field in fills/selects/checks/uploads, matched to profile values.
+- ref MUST be the numeric string from the snapshot brackets (e.g. "12"). Never use semantic names.
+- SKIP any field whose snapshot already shows FILLED="..." — leave those out of fills/selects/checks.
+- Include every OTHER required field in fills/selects/checks/uploads, matched to profile values.
 - For selects: pick the option label that best matches the profile. Prefer exact; else closest semantic match.
 - For EEO/demographic questions, use the profile's declared answers (gender, race, veteran_status, etc).
 - clicks_in_order: include ONLY clicks needed on this page (e.g., "Continue" at the end). Do NOT include the final Submit.
@@ -110,9 +111,16 @@ export const approachE: Approach = {
     while (steps < ctx.maxSteps) {
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
-      if (snap.structuralHash === lastHash) stagnation++; else stagnation = 0;
-      lastHash = snap.structuralHash;
+      if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
+      lastHash = snap.behaviorHash;
       if (stagnation >= 2) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit, note: 'no progress after compile' };
+
+      const readyCheck = checkReadyToSubmit(snap);
+      if (readyCheck.ready) {
+        readyToSubmit = true;
+        ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });
+        return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      }
 
       let out;
       try {

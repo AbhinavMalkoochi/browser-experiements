@@ -118,7 +118,9 @@ async function cmdRun(args: CliArgs) {
     console.log(
       `${r.approach.padEnd(24)}  success=${(r.successRate * 100).toFixed(0)}%  ready=${(r.readyRate * 100).toFixed(0)}%  ` +
       `avgCost=$${r.avgCostUsd.toFixed(4)}  avgDur=${(r.avgDurationMs / 1000).toFixed(1)}s  ` +
-      `avgLLM=${r.avgLlmCalls.toFixed(1)}  failures=${JSON.stringify(r.failureModes)}`
+      `medDur=${(r.medianDurationMs / 1000).toFixed(1)}s  p95=${(r.p95DurationMs / 1000).toFixed(1)}s  ` +
+      `avgLLM=${r.avgLlmCalls.toFixed(1)}  steps=${r.avgSteps.toFixed(1)}  ` +
+      `failures=${JSON.stringify(r.failureModes)}`
     );
   }
   console.log(`\nTotal cost: $${summary.totalCostUsd.toFixed(4)}`);

@@ -1,0 +1,33 @@
+{
+  "approach": "b-axtree-indexed",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776366940020,
+  "finishedAt": 1776367163562,
+  "durationMs": 223542,
+  "stepsTaken": 30,
+  "actionsExecuted": 67,
+  "totalLlmCalls": 30,
+  "totalInputTokens": 54828,
+  "totalOutputTokens": 4030,
+  "totalCostUsd": 0.010642200000000004,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/ashby-liquid/seed-0"
+}

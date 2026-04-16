@@ -208,7 +208,15 @@ export class Actuator {
           }
           if (action.kind === 'fill') {
             const v = action.value ?? '';
-            // Use typeHuman unless fill is long to avoid 1M keystrokes
+            // Short-circuit: if the field is already filled with the same or substantially
+            // similar value, skip. Prevents repeat-fill loops (the #1 failure mode).
+            if (node?.value && typeof node.value === 'string') {
+              const cur = node.value.trim();
+              const want = v.trim();
+              if (cur.length > 0 && (cur === want || (want.length > 3 && cur.startsWith(want.slice(0, 16))))) {
+                return { ok: true, note: 'already filled — skipped' };
+              }
+            }
             if (v.length > 120) {
               await handle.fill('');
               await handle.fill(v);
@@ -246,18 +254,38 @@ export class Actuator {
           }
           if (action.kind === 'upload') {
             if (!action.value) return { ok: false, error: 'upload requires file path in value' };
+            // Broad file-input resolver: try the handle, then its subtree,
+            // then walk up to 4 ancestors looking for a nearby input[type=file].
             const input = await handle.evaluateHandle((el) => {
               if (el instanceof HTMLInputElement && el.type === 'file') return el;
-              const inner = (el as Element).querySelector('input[type=file]');
-              return inner ?? el;
+              const direct = (el as Element).querySelector('input[type=file]');
+              if (direct) return direct as Element;
+              let p: Element | null = (el as Element).parentElement;
+              for (let i = 0; i < 4 && p; i++, p = p.parentElement) {
+                const inSub = p.querySelector('input[type=file]');
+                if (inSub) return inSub as Element;
+              }
+              // Last resort: the closest form + first file input in the document
+              const anyFile = document.querySelector('input[type=file]');
+              return anyFile ?? null;
             });
             const asElement = input.asElement();
             if (!asElement) return { ok: false, error: 'no file input resolvable' };
+            // setInputFiles works even when the input is hidden; Playwright un-hides it.
             try {
               await (asElement as ElementHandle<HTMLInputElement>).setInputFiles(action.value);
               return { ok: true };
             } catch (e) {
-              return { ok: false, error: `upload failed: ${(e as Error).message}` };
+              // Some custom upload widgets open an OS dialog on click; use filechooser event.
+              try {
+                const chooserPromise = this.page.waitForEvent('filechooser', { timeout: 4000 });
+                await this.clickWithEventChain(handle);
+                const chooser = await chooserPromise;
+                await chooser.setFiles(action.value);
+                return { ok: true, note: 'filechooser fallback' };
+              } catch (e2) {
+                return { ok: false, error: `upload failed: ${(e as Error).message} / chooser: ${(e2 as Error).message}` };
+              }
             }
           }
           return { ok: false, error: `unsupported action kind: ${action.kind}` };

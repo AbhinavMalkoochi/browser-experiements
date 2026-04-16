@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, executeActions, profileToYaml, snapshotWithRetry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, checkReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx, diffSnapshots } from '../core/ax.js';
 import { chat, userTextImage } from '../core/llm.js';
 import { screenshotDataUrl } from '../core/browser.js';
@@ -23,13 +23,18 @@ const VERDICT_SCHEMA = {
     verdict: { type: 'string', enum: ['succeeded', 'failed', 'unclear'] },
     evidence: { type: 'string' },
     suggested_alternate: {
-      type: 'object',
+      type: ['object', 'null'],
       additionalProperties: false,
-      properties: { ref: { type: 'string' }, kind: { type: 'string' }, value: { type: 'string' }, reason: { type: 'string' } },
-      required: ['ref', 'kind', 'reason'],
+      properties: {
+        ref: { type: 'string' },
+        kind: { type: 'string' },
+        value: { type: ['string', 'null'] },
+        reason: { type: 'string' },
+      },
+      required: ['ref', 'kind', 'value', 'reason'],
     },
   },
-  required: ['verdict', 'evidence'],
+  required: ['verdict', 'evidence', 'suggested_alternate'],
 } as const;
 
 export const approachH: Approach = {
@@ -43,13 +48,21 @@ export const approachH: Approach = {
     let rollbacksLeft = 2;
     let lastHash = '';
     let stagnation = 0;
+    const history: ActionHistoryEntry[] = [];
 
     while (steps < ctx.maxSteps) {
       steps += 1;
       const beforeSnap = await snapshotWithRetry(ctx.page);
-      if (beforeSnap.structuralHash === lastHash) stagnation++; else stagnation = 0;
-      lastHash = beforeSnap.structuralHash;
-      if (stagnation >= 4) break;
+      if (beforeSnap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
+      lastHash = beforeSnap.behaviorHash;
+      if (stagnation >= 3) break;
+
+      const readyCheck = checkReadyToSubmit(beforeSnap);
+      if (readyCheck.ready) {
+        readyToSubmit = true;
+        ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });
+        return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      }
 
       const beforeShot = await screenshotDataUrl(ctx.page, false);
 
@@ -57,8 +70,21 @@ export const approachH: Approach = {
       const propose = await chat<DslOutput>({
         model: ENV.EXECUTOR_MODEL,
         messages: [
-          { role: 'system', content: 'Form-filling agent. Use refs. Emit up to 2 actions. For uploads value:"resume". Done when form filled + submit visible.' },
-          { role: 'user', content: [`GOAL: ${ctx.task.goal}`, '', 'PROFILE:', profileYaml, '', 'SNAPSHOT:', formatAx(beforeSnap, 140)].join('\n') },
+          { role: 'system', content: 'Form-filling agent. Use numeric refs. Skip FILLED fields. Emit up to 2 actions. Uploads value:"resume". Done when form filled + submit visible.' },
+          {
+            role: 'user',
+            content: [
+              `GOAL: ${ctx.task.goal}`,
+              '',
+              'PROFILE:',
+              profileYaml,
+              '',
+              formatActionHistory(history),
+              '',
+              'SNAPSHOT:',
+              formatAx(beforeSnap, 140),
+            ].join('\n'),
+          },
         ],
         jsonSchema: { name: 'AgentStep', schema: ACTION_DSL_SCHEMA, strict: true },
         maxTokens: 600,
@@ -67,7 +93,7 @@ export const approachH: Approach = {
       ctx.logLlm(propose.usage);
       if (!propose.json) continue;
 
-      const res = await executeActions(ctx, beforeSnap, propose.json.actions, steps);
+      const res = await executeActions(ctx, beforeSnap, propose.json.actions, steps, history);
       executed += res.executed;
 
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
@@ -116,7 +142,7 @@ export const approachH: Approach = {
           value: alt.value ?? lastAction?.value,
           reason: `rollback: ${alt.reason}`,
         };
-        const retry = await executeActions(ctx, afterSnap, [altAction], steps);
+        const retry = await executeActions(ctx, afterSnap, [altAction], steps, history);
         executed += retry.executed;
       }
     }

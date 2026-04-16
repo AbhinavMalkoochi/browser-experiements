@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, executeActions, profileToYaml, snapshotWithRetry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, checkReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx } from '../core/ax.js';
 import { renderSetOfMarks } from '../core/som.js';
 import { chat, userTextImage } from '../core/llm.js';
@@ -14,20 +14,19 @@ const VISION_SCHEMA = {
     thought: { type: 'string' },
     actions: {
       type: 'array',
-      maxItems: 3,
       items: {
         type: 'object',
         additionalProperties: false,
         properties: {
           kind: { type: 'string', enum: ['click', 'fill', 'select', 'check', 'upload', 'press', 'scroll', 'wait', 'done', 'abort'] },
-          index: { type: 'integer' },
-          value: { type: 'string' },
-          enter: { type: 'boolean' },
-          seconds: { type: 'number' },
+          index: { type: ['integer', 'null'] },
+          value: { type: ['string', 'null'] },
+          enter: { type: ['boolean', 'null'] },
+          seconds: { type: ['number', 'null'] },
           reason: { type: 'string' },
-          status: { type: 'string', enum: ['ready_to_submit', 'submitted', 'blocked', 'error'] },
+          status: { type: ['string', 'null'] },
         },
-        required: ['kind', 'reason'],
+        required: ['kind', 'index', 'value', 'enter', 'seconds', 'reason', 'status'],
       },
     },
   },
@@ -54,24 +53,44 @@ export const approachF: Approach = {
     let readyToSubmit = false;
     let stagnation = 0;
     let lastHash = '';
+    const history: ActionHistoryEntry[] = [];
     const profileYaml = profileToYaml(ctx.profile);
 
     while (steps < ctx.maxSteps) {
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
-      if (snap.structuralHash === lastHash) stagnation++; else stagnation = 0;
-      lastHash = snap.structuralHash;
-      if (stagnation >= 4) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
+      lastHash = snap.behaviorHash;
+      if (stagnation >= 3) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+
+      const readyCheck = checkReadyToSubmit(snap);
+      if (readyCheck.ready) {
+        readyToSubmit = true;
+        ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });
+        return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      }
 
       const som = await renderSetOfMarks(ctx.page, snap, 40);
       await fs.writeFile(path.join(ctx.artifactDir, `som-${steps}.png`), som.pngBuffer).catch(() => {});
 
-      // --- Eye A (AX) ---
       const axPromise = chat<DslOutput>({
         model: ENV.EXECUTOR_MODEL,
         messages: [
-          { role: 'system', content: 'You are a reliable form-filling agent. Return 1 action (the single highest-priority one). Use refs from the snapshot. For uploads use value:"resume". For final done use kind:"done", status:"ready_to_submit". For block use kind:"abort".' },
-          { role: 'user', content: [`GOAL: ${ctx.task.goal}`, '', 'PROFILE:', profileYaml, '', 'SNAPSHOT:', formatAx(snap, 120)].join('\n') },
+          { role: 'system', content: 'Reliable form-filling agent. Return exactly 1 action (top priority). Use numeric refs. Skip fields with FILLED="...". For uploads value:"resume". Done: {kind:"done", status:"ready_to_submit"}. Block: {kind:"abort"}.' },
+          {
+            role: 'user',
+            content: [
+              `GOAL: ${ctx.task.goal}`,
+              '',
+              'PROFILE:',
+              profileYaml,
+              '',
+              formatActionHistory(history),
+              '',
+              'SNAPSHOT:',
+              formatAx(snap, 120),
+            ].join('\n'),
+          },
         ],
         jsonSchema: { name: 'AgentStep', schema: ACTION_DSL_SCHEMA, strict: true },
         maxTokens: 500,
@@ -167,7 +186,7 @@ export const approachF: Approach = {
 
       if (!chosen) continue;
 
-      const res = await executeActions(ctx, snap, [chosen], steps);
+      const res = await executeActions(ctx, snap, [chosen], steps, history);
       executed += res.executed;
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
       if (res.terminal === 'abort') return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };

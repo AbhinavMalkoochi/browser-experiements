@@ -5,60 +5,78 @@ import type { TestProfile } from './types.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const RESUME_PATH = path.resolve(__dirname, '../../fixtures/resume.pdf');
+/**
+ * Use the real resume.pdf committed at the repo root. This guarantees uploads
+ * exercise a real (browser-recognizable) PDF end-to-end.
+ */
+export const RESUME_PATH = path.resolve(__dirname, '../../../../resume.pdf');
 
+/**
+ * Test persona — deliberately synthetic (no real person). International student
+ * with F-1 OPT status who needs future sponsorship and will relocate anywhere.
+ * This stresses common branching fields (sponsorship/relocation/EEO).
+ */
 export const TEST_PROFILE: TestProfile = {
-  firstName: 'Alex',
-  lastName: 'Morgan',
-  fullName: 'Alex Morgan',
-  email: 'alex.morgan.test+jobagent@example.com',
-  phone: '415-555-0142',
-  linkedin: 'https://www.linkedin.com/in/alex-morgan-test',
-  github: 'https://github.com/alex-morgan-test',
-  website: 'https://alexmorgan.dev',
-  location: 'San Francisco, CA, USA',
-  city: 'San Francisco',
+  firstName: 'Priya',
+  lastName: 'Narayan',
+  fullName: 'Priya Narayan',
+  email: 'priya.narayan.apply@gmail.com',
+  phone: '415-555-0168',
+  linkedin: 'https://www.linkedin.com/in/priya-narayan-dev',
+  github: 'https://github.com/priya-narayan',
+  website: 'https://priyanarayan.dev',
+  location: 'San Jose, CA, USA',
+  city: 'San Jose',
   state: 'California',
   country: 'United States',
-  zip: '94105',
+  zip: '95112',
   currentCompany: 'Bright Labs',
   currentTitle: 'Software Engineer',
-  yearsExperience: 4,
-  workAuthorization: 'US Citizen',
-  requiresSponsorship: 'No',
+  yearsExperience: 2,
+  workAuthorization:
+    'F-1 STEM OPT — authorized to work in the US; will require H-1B sponsorship in the future',
+  requiresSponsorship: 'Yes',
   willingToRelocate: 'Yes',
-  preferredStartDate: '2026-06-01',
-  salaryExpectation: '150000',
-  gender: 'Prefer not to say',
-  race: 'Prefer not to say',
+  preferredStartDate: '2026-06-15',
+  salaryExpectation: '145000',
+  gender: 'Female',
+  race: 'Asian',
   veteranStatus: 'I am not a protected veteran',
-  disabilityStatus: 'I do not wish to answer',
-  pronouns: 'they/them',
+  disabilityStatus: 'No, I do not have a disability',
+  pronouns: 'she/her',
   hispanicLatino: 'No',
   resumePath: RESUME_PATH,
   coverLetterPath: null,
   coverLetterText:
-    'I am excited to apply for this role. I have four years of experience shipping reliable, high-performance web services with TypeScript, React, Node.js, and Python. I love working on developer-facing tools, reliability, and automation. I would be glad to talk more about how I can contribute.',
+    "I am a software engineer with two years of full-time industry experience plus internships across web infrastructure and developer tooling. I ship reliable, well-tested TypeScript, Python, and Go services and care deeply about developer experience and reliability. I'm excited by your team's focus on building tools that engineers actually love using, and I would contribute pragmatic code, thoughtful design, and a strong bias toward small, safe increments.",
   summary:
-    'Software engineer with 4 years of experience building web applications and platforms with TypeScript, React, Node.js, Python, and cloud infrastructure (AWS, GCP). Passionate about reliability, developer experience, and automation.',
+    'Software engineer with ~2 years of industry experience in TypeScript, Python, Go, React/Next.js, Node.js, PostgreSQL, and AWS/GCP. Focus on reliability, developer experience, and automation. Currently on F-1 STEM OPT; open to relocate anywhere in the US.',
   skills: [
     'TypeScript', 'JavaScript', 'Python', 'Go', 'React', 'Next.js', 'Node.js', 'PostgreSQL',
-    'Redis', 'AWS', 'GCP', 'Docker', 'Kubernetes', 'GraphQL', 'REST', 'CI/CD',
+    'Redis', 'AWS', 'GCP', 'Docker', 'Kubernetes', 'GraphQL', 'REST', 'CI/CD', 'Playwright',
+    'Terraform', 'Kafka',
   ],
   education: [
     {
-      school: 'University of California, Berkeley',
-      degree: 'Bachelor of Science',
+      school: 'University of California, San Diego',
+      degree: 'Master of Science',
       field: 'Computer Science',
-      gradYear: 2021,
-      gpa: '3.78',
+      gradYear: 2024,
+      gpa: '3.86',
+    },
+    {
+      school: 'Indian Institute of Technology, Bombay',
+      degree: 'Bachelor of Technology',
+      field: 'Computer Science and Engineering',
+      gradYear: 2022,
+      gpa: '8.7/10',
     },
   ],
   experience: [
     {
       company: 'Bright Labs',
       title: 'Software Engineer',
-      start: '2023-01',
+      start: '2024-07',
       end: 'Present',
       bullets: [
         'Led the redesign of the billing platform, cutting P99 latency by 48%.',
@@ -67,23 +85,28 @@ export const TEST_PROFILE: TestProfile = {
       ],
     },
     {
-      company: 'Kestrel Systems',
-      title: 'Software Engineer I',
-      start: '2021-06',
-      end: '2022-12',
+      company: 'Stripe',
+      title: 'Software Engineer Intern',
+      start: '2023-06',
+      end: '2023-09',
       bullets: [
-        'Built a low-latency event ingestion pipeline in Go on Kafka + Postgres.',
-        'Mentored two interns, both converted to full-time offers.',
-        'Automated on-call playbooks; reduced MTTR by 34% across three quarters.',
+        'Built a low-latency fraud-signal pipeline in Go on Kafka + Postgres.',
+        'Added tracing instrumentation adopted across 3 partner services.',
       ],
     },
   ],
   qa: [
-    { q: 'Why do you want to work here', a: 'Your mission to build reliable, developer-facing tooling aligns with what I enjoy and do best.' },
-    { q: 'Tell us about yourself', a: 'I am a software engineer with 4 years of experience focusing on platform reliability and developer experience.' },
-    { q: 'Years of experience', a: '4' },
+    { q: 'Why do you want to work here', a: 'Your focus on reliability and developer-facing tooling is exactly the space I enjoy most — I want to ship software other engineers love depending on.' },
+    { q: 'Tell us about yourself', a: 'I am a software engineer with two years of industry experience focused on developer experience and reliability, currently on F-1 STEM OPT.' },
+    { q: 'Why this role', a: 'The work combines platform reliability and developer experience, which is where I have shipped most of my best results.' },
+    { q: 'Years of experience', a: '2' },
     { q: 'How did you hear about us', a: 'LinkedIn' },
     { q: 'Notice period', a: '2 weeks' },
     { q: 'Referred by', a: 'N/A' },
+    { q: 'Will you now or in the future require sponsorship', a: 'Yes' },
+    { q: 'Are you legally authorized to work', a: 'Yes' },
+    { q: 'Willing to relocate', a: 'Yes, I am willing to relocate anywhere in the US.' },
+    { q: 'Desired salary', a: '$145,000 USD base, flexible' },
   ],
 };
+

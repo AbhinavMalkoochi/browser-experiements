@@ -8,10 +8,20 @@ export interface SummaryTableRow {
   successRate: number;
   readyRate: number;
   avgDurationMs: number;
+  medianDurationMs: number;
+  p95DurationMs: number;
   avgCostUsd: number;
   avgLlmCalls: number;
   avgSteps: number;
+  avgActionsExecuted: number;
   failureModes: Record<string, number>;
+}
+
+function quantile(xs: number[], q: number): number {
+  if (xs.length === 0) return 0;
+  const s = [...xs].sort((a, b) => a - b);
+  const i = Math.min(s.length - 1, Math.max(0, Math.floor(q * (s.length - 1))));
+  return s[i]!;
 }
 
 export function summarize(results: RunResult[]): {
@@ -30,10 +40,14 @@ export function summarize(results: RunResult[]): {
     const runs = arr.length;
     const success = arr.filter((r) => r.success).length;
     const ready = arr.filter((r) => r.readyToSubmit).length;
-    const avgDurationMs = arr.reduce((s, r) => s + r.durationMs, 0) / Math.max(1, runs);
+    const durations = arr.map((r) => r.durationMs);
+    const avgDurationMs = durations.reduce((s, d) => s + d, 0) / Math.max(1, runs);
+    const medianDurationMs = quantile(durations, 0.5);
+    const p95DurationMs = quantile(durations, 0.95);
     const avgCostUsd = arr.reduce((s, r) => s + r.totalCostUsd, 0) / Math.max(1, runs);
     const avgLlmCalls = arr.reduce((s, r) => s + r.totalLlmCalls, 0) / Math.max(1, runs);
     const avgSteps = arr.reduce((s, r) => s + r.stepsTaken, 0) / Math.max(1, runs);
+    const avgActionsExecuted = arr.reduce((s, r) => s + r.actionsExecuted, 0) / Math.max(1, runs);
     const failureModes: Record<string, number> = {};
     for (const r of arr) {
       if (!r.success) {
@@ -47,9 +61,12 @@ export function summarize(results: RunResult[]): {
       successRate: success / Math.max(1, runs),
       readyRate: ready / Math.max(1, runs),
       avgDurationMs,
+      medianDurationMs,
+      p95DurationMs,
       avgCostUsd,
       avgLlmCalls,
       avgSteps,
+      avgActionsExecuted,
       failureModes,
     });
   }
@@ -118,11 +135,12 @@ export async function writeReport(resultsRoot: string, results: RunResult[]): Pr
 <h1>Best-job-agent eval report</h1>
 <p class="muted">Generated ${new Date().toISOString()} · ${results.length} runs · total cost $${summary.totalCostUsd.toFixed(4)}</p>
 
-<h2>Approach leaderboard</h2>
+<h2>Approach leaderboard (sorted by ready-rate, then success, then cost)</h2>
 <table>
   <thead><tr>
     <th>Approach</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th>
-    <th class="num">Avg dur (s)</th><th class="num">Avg cost ($)</th><th class="num">Avg LLM calls</th><th class="num">Avg steps</th>
+    <th class="num">Avg dur (s)</th><th class="num">Med dur (s)</th><th class="num">P95 dur (s)</th>
+    <th class="num">Avg cost ($)</th><th class="num">Avg LLM calls</th><th class="num">Avg steps</th><th class="num">Avg actions</th>
     <th>Failures</th>
   </tr></thead>
   <tbody>
@@ -134,9 +152,12 @@ export async function writeReport(resultsRoot: string, results: RunResult[]): Pr
       <td class="num">${(r.successRate * 100).toFixed(0)}%</td>
       <td class="num">${(r.readyRate * 100).toFixed(0)}%</td>
       <td class="num">${(r.avgDurationMs / 1000).toFixed(1)}</td>
+      <td class="num">${(r.medianDurationMs / 1000).toFixed(1)}</td>
+      <td class="num">${(r.p95DurationMs / 1000).toFixed(1)}</td>
       <td class="num">${r.avgCostUsd.toFixed(4)}</td>
       <td class="num">${r.avgLlmCalls.toFixed(1)}</td>
       <td class="num">${r.avgSteps.toFixed(1)}</td>
+      <td class="num">${r.avgActionsExecuted.toFixed(1)}</td>
       <td>${Object.entries(r.failureModes).map(([k, v]) => `<span class="badge">${k}:${v}</span>`).join('')}</td>
     </tr>`
     )

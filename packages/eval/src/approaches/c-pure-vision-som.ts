@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
 import { renderSetOfMarks } from '../core/som.js';
-import { snapshotWithRetry, profileToYaml, executeActions } from './shared.js';
+import { snapshotWithRetry, profileToYaml, executeActions, formatActionHistory, type ActionHistoryEntry } from './shared.js';
 import { chat, userTextImage } from '../core/llm.js';
 import { ENV } from '../env.js';
 
@@ -13,20 +13,19 @@ const SOM_SCHEMA = {
     thought: { type: 'string' },
     actions: {
       type: 'array',
-      maxItems: 3,
       items: {
         type: 'object',
         additionalProperties: false,
         properties: {
           kind: { type: 'string', enum: ['click', 'fill', 'select', 'check', 'upload', 'press', 'scroll', 'wait', 'done', 'abort'] },
-          index: { type: 'integer' },
-          value: { type: 'string' },
-          enter: { type: 'boolean' },
-          seconds: { type: 'number' },
+          index: { type: ['integer', 'null'] },
+          value: { type: ['string', 'null'] },
+          enter: { type: ['boolean', 'null'] },
+          seconds: { type: ['number', 'null'] },
           reason: { type: 'string' },
-          status: { type: 'string', enum: ['ready_to_submit', 'submitted', 'blocked', 'error'] },
+          status: { type: ['string', 'null'] },
         },
-        required: ['kind', 'reason'],
+        required: ['kind', 'index', 'value', 'enter', 'seconds', 'reason', 'status'],
       },
     },
   },
@@ -42,20 +41,19 @@ export const approachC: Approach = {
     let readyToSubmit = false;
     let lastHash = '';
     let stagnation = 0;
+    const history: ActionHistoryEntry[] = [];
     const profileYaml = profileToYaml(ctx.profile);
 
     while (steps < ctx.maxSteps) {
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
-      if (snap.structuralHash === lastHash) stagnation++; else stagnation = 0;
-      lastHash = snap.structuralHash;
-      if (stagnation >= 4) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
+      lastHash = snap.behaviorHash;
+      if (stagnation >= 3) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
 
       const som = await renderSetOfMarks(ctx.page, snap, 40);
-      // Save for artifact
       await fs.writeFile(path.join(ctx.artifactDir, `som-${steps}.png`), som.pngBuffer).catch(() => {});
 
-      // Vision model sees only the annotated screenshot + the goal + profile.
       const prompt = [
         `Goal: ${ctx.task.goal}`,
         '',
@@ -64,8 +62,11 @@ export const approachC: Approach = {
         '- Use the numbered "index" to target an element.',
         '- For fills, put the desired text in "value".',
         '- For uploads, put "resume" in value.',
+        '- Do NOT re-fill a field whose value is already present on screen.',
         '- Emit {kind:"done", status:"ready_to_submit"} when form is filled and Submit is visible; do NOT submit.',
         '- Emit {kind:"abort", status:"blocked"} on captcha/login wall.',
+        '',
+        formatActionHistory(history),
         '',
         'Profile:',
         profileYaml,
@@ -95,7 +96,7 @@ export const approachC: Approach = {
           ref: node?.ref,
         };
       });
-      const res = await executeActions(ctx, snap, translated, steps);
+      const res = await executeActions(ctx, snap, translated, steps, history);
       executed += res.executed;
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
       if (res.terminal === 'abort') return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };

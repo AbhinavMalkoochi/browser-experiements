@@ -1,0 +1,38 @@
+{
+  "approach": "e-form-dsl",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776367244957,
+  "finishedAt": 1776367272581,
+  "durationMs": 27624,
+  "stepsTaken": 1,
+  "actionsExecuted": 14,
+  "totalLlmCalls": 1,
+  "totalInputTokens": 1951,
+  "totalOutputTokens": 340,
+  "totalCostUsd": 0.00049665,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": false,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 9,
+    "missing": [
+      "Country*",
+      "Are you currently eligible to work in the United States of America?*",
+      "Do you now or in the future require visa sponsorship to continue working in the United States?*",
+      "iSpot cannot support visa sponsorships or transfers for this role. Please confirm you do not need visa sponsorship.*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.56 filled=5/9 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": "partial_filled",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/greenhouse-ispottv/seed-0"
+}

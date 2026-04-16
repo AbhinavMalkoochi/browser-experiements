@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Best-job-agent eval report</title>
+<style>
+  body { font-family: -apple-system, system-ui, Segoe UI, sans-serif; margin: 24px; color: #111; }
+  h1, h2 { margin: 16px 0 8px; }
+  table { border-collapse: collapse; margin: 8px 0 24px; }
+  th, td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; font-size: 13px; }
+  th { background: #f6f6f6; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .cell { display: inline-block; min-width: 72px; padding: 4px 6px; color: white; text-align: center; font-size: 11px; border-radius: 3px; }
+  .muted { color: #666; font-size: 12px; }
+  .badge { display: inline-block; background: #eee; border-radius: 3px; padding: 1px 5px; font-size: 11px; margin-right: 4px; }
+</style>
+</head>
+<body>
+<h1>Best-job-agent eval report</h1>
+<p class="muted">Generated 2026-04-16T19:24:29.739Z · 4 runs · total cost $0.0200</p>
+
+<h2>Approach leaderboard (sorted by ready-rate, then success, then cost)</h2>
+<table>
+  <thead><tr>
+    <th>Approach</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th>
+    <th class="num">Avg dur (s)</th><th class="num">Med dur (s)</th><th class="num">P95 dur (s)</th>
+    <th class="num">Avg cost ($)</th><th class="num">Avg LLM calls</th><th class="num">Avg steps</th><th class="num">Avg actions</th>
+    <th>Failures</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+      <td><b>b-axtree-indexed</b></td>
+      <td class="num">2</td>
+      <td class="num">50%</td>
+      <td class="num">50%</td>
+      <td class="num">264.0</td>
+      <td class="num">223.5</td>
+      <td class="num">223.5</td>
+      <td class="num">0.0081</td>
+      <td class="num">23.0</td>
+      <td class="num">15.0</td>
+      <td class="num">33.5</td>
+      <td><span class="badge">timeout:1</span></td>
+    </tr>
+<tr>
+      <td><b>e-form-dsl</b></td>
+      <td class="num">2</td>
+      <td class="num">0%</td>
+      <td class="num">50%</td>
+      <td class="num">166.4</td>
+      <td class="num">27.6</td>
+      <td class="num">27.6</td>
+      <td class="num">0.0019</td>
+      <td class="num">3.0</td>
+      <td class="num">0.5</td>
+      <td class="num">7.0</td>
+      <td><span class="badge">partial_filled:1</span><span class="badge">timeout:1</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Per-task heatmap (cells: success/total · ready/total)</h2>
+<table>
+  <thead><tr><th>Approach</th><th>ashby-liquid</th><th>greenhouse-ispottv</th></tr></thead>
+  <tbody>
+  <tr>
+      <td><b>b-axtree-indexed</b></td>
+      <td title="status=success
+cost=$0.0106
+duration=223.5s
+steps=30
+llm=30
+evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=timeout
+cost=$0.0056
+duration=304.4s
+steps=0
+llm=16
+evidence=ratio=0.83 filled=5/6 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td>
+    </tr>
+<tr>
+      <td><b>e-form-dsl</b></td>
+      <td title="status=timeout
+cost=$0.0032
+duration=305.3s
+steps=0
+llm=5
+evidence=ratio=0.00 filled=0/0 submit=true/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=ready
+cost=$0.0005
+duration=27.6s
+steps=1
+llm=1
+evidence=ratio=0.56 filled=5/9 submit=true/true submittedLike=false"><span class="cell" style="background:#65a30d">0/1 · 1/1r</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>All runs</h2>
+<table>
+  <thead><tr>
+    <th>Approach</th><th>Task</th><th>Seed</th><th>Success</th><th>Ready</th>
+    <th class="num">Dur (s)</th><th class="num">Cost ($)</th><th class="num">LLM</th><th class="num">Steps</th>
+    <th>Failure</th><th>Evidence</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+      <td>b-axtree-indexed</td>
+      <td>ashby-liquid</td>
+      <td>0</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td class="num">223.5</td>
+      <td class="num">0.0106</td>
+      <td class="num">30</td>
+      <td class="num">30</td>
+      <td></td>
+      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>b-axtree-indexed</td>
+      <td>greenhouse-ispottv</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td class="num">304.4</td>
+      <td class="num">0.0056</td>
+      <td class="num">16</td>
+      <td class="num">0</td>
+      <td>timeout</td>
+      <td class="muted">ratio=0.83 filled=5/6 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>e-form-dsl</td>
+      <td>greenhouse-ispottv</td>
+      <td>0</td>
+      <td></td>
+      <td>✓</td>
+      <td class="num">27.6</td>
+      <td class="num">0.0005</td>
+      <td class="num">1</td>
+      <td class="num">1</td>
+      <td>partial_filled</td>
+      <td class="muted">ratio=0.56 filled=5/9 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>e-form-dsl</td>
+      <td>ashby-liquid</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td class="num">305.3</td>
+      <td class="num">0.0032</td>
+      <td class="num">5</td>
+      <td class="num">0</td>
+      <td>timeout</td>
+      <td class="muted">ratio=0.00 filled=0/0 submit=true/false submittedLike=false</td>
+    </tr>
+  </tbody>
+</table>
+</body></html>

@@ -1,0 +1,33 @@
+{
+  "approach": "e-form-dsl",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776367164005,
+  "finishedAt": 1776367469263,
+  "durationMs": 305258,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 8938,
+  "totalOutputTokens": 3175,
+  "totalCostUsd": 0.0032456999999999994,
+  "finalUrl": "https://app.tryliquid.xyz/trade/xyz:GOLD",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": false,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/false submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/ashby-liquid/seed-0"
+}

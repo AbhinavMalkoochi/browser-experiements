@@ -63,6 +63,8 @@ export interface AxSnapshot {
   visibleText: string;
   /** Hash of node signatures in order — changes when layout/structure changes. */
   structuralHash: string;
+  /** Hash including values + checked states — changes when fills happen. Used for stagnation detection. */
+  behaviorHash: string;
 }
 
 const EXTRACTOR_SCRIPT = `
@@ -191,7 +193,9 @@ const EXTRACTOR_SCRIPT = `
     while ((n = walker.nextNode())) els.push(n);
     for (const el of els) {
       if (!(el instanceof Element)) continue;
-      if (!isVisible(el)) continue;
+      const isFileInput = el.tagName === 'INPUT' && (el.getAttribute('type') || '').toLowerCase() === 'file';
+      // File inputs are often intentionally hidden; keep them regardless.
+      if (!isFileInput && !isVisible(el)) continue;
       const role = roleOf(el);
       if (!INTERACTABLE_ROLES.has(role)) {
         // Also pick up custom components with tabindex/contenteditable
@@ -305,6 +309,9 @@ export async function extractAxSnapshot(page: Page): Promise<AxSnapshot> {
   });
 
   const structuralHash = hashString(withRefs.map((n) => n.sig).join(','));
+  const behaviorHash = hashString(
+    withRefs.map((n) => `${n.sig}:${n.value}:${n.checked ? 1 : 0}:${n.disabled ? 1 : 0}`).join('|')
+  );
 
   return {
     url: main.url,
@@ -314,6 +321,7 @@ export async function extractAxSnapshot(page: Page): Promise<AxSnapshot> {
     nodes: withRefs,
     visibleText: main.visibleText,
     structuralHash,
+    behaviorHash,
   };
 }
 
@@ -339,7 +347,13 @@ export function formatAx(snapshot: AxSnapshot, limit = 120): string {
     if (n.name) bits.push(`"${n.name}"`);
     if (n.label && n.label !== n.name) bits.push(`label="${n.label}"`);
     if (n.placeholder) bits.push(`ph="${n.placeholder}"`);
-    if (n.value) bits.push(`value="${String(n.value).slice(0, 60)}"`);
+    // Make filled status very visible so the LLM does not re-fill already-filled fields.
+    const filledLike =
+      (n.role === 'textbox' || n.role === 'searchbox' || n.role === 'combobox') &&
+      typeof n.value === 'string' &&
+      n.value.trim().length > 0;
+    if (filledLike) bits.push(`FILLED="${String(n.value).slice(0, 60)}"`);
+    else if (n.value) bits.push(`value="${String(n.value).slice(0, 60)}"`);
     if (n.required) bits.push('REQ');
     if (n.disabled) bits.push('DIS');
     if (n.checked) bits.push('CHK');

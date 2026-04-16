@@ -1,9 +1,7 @@
 import type { Page } from 'playwright';
-import { z } from 'zod';
 import type { Action, ApproachCtx, TestProfile } from '../core/types.js';
-import { extractAxSnapshot, formatAx, type AxSnapshot } from '../core/ax.js';
+import { extractAxSnapshot, type AxSnapshot } from '../core/ax.js';
 import { Actuator } from '../core/actuator.js';
-import { chat } from '../core/llm.js';
 import { waitForIdle } from '../core/browser.js';
 
 /**
@@ -17,7 +15,6 @@ export const ACTION_DSL_SCHEMA = {
     thought: { type: 'string' },
     actions: {
       type: 'array',
-      maxItems: 3,
       items: {
         type: 'object',
         additionalProperties: false,
@@ -29,15 +26,14 @@ export const ACTION_DSL_SCHEMA = {
               'scroll', 'wait', 'goto', 'done', 'abort',
             ],
           },
-          ref: { type: 'string' },
-          index: { type: 'integer' },
-          value: { type: 'string' },
-          enter: { type: 'boolean' },
-          seconds: { type: 'number' },
+          ref: { type: ['string', 'null'] },
+          value: { type: ['string', 'null'] },
+          enter: { type: ['boolean', 'null'] },
+          seconds: { type: ['number', 'null'] },
           reason: { type: 'string' },
-          status: { type: 'string', enum: ['ready_to_submit', 'submitted', 'blocked', 'error'] },
+          status: { type: ['string', 'null'] },
         },
-        required: ['kind', 'reason'],
+        required: ['kind', 'ref', 'value', 'enter', 'seconds', 'reason', 'status'],
       },
     },
   },
@@ -94,11 +90,38 @@ export interface StepCtx {
   artifactDir: string;
 }
 
+export interface ActionHistoryEntry {
+  step: number;
+  action: Action;
+  ok: boolean;
+  error?: string;
+}
+
+/**
+ * Short textual action history for the executor prompt. Encourages the model
+ * to stop re-proposing the same action after a successful execution and to
+ * try a different strategy after a failure.
+ */
+export function formatActionHistory(history: ActionHistoryEntry[], limit = 8): string {
+  if (history.length === 0) return 'RECENT ACTIONS: (none yet)';
+  const tail = history.slice(-limit);
+  const lines = tail.map((h) => {
+    const a = h.action;
+    const bits: string[] = [`${a.kind}`];
+    if (a.ref) bits.push(`ref=${a.ref}`);
+    if (a.value) bits.push(`value=${JSON.stringify(a.value).slice(0, 60)}`);
+    const status = h.ok ? 'ok' : `FAIL(${(h.error ?? '').slice(0, 80)})`;
+    return `  #${h.step} ${bits.join(' ')} -> ${status}`;
+  });
+  return `RECENT ACTIONS (oldest→newest):\n${lines.join('\n')}`;
+}
+
 export async function executeActions(
   ctx: ApproachCtx,
   snap: AxSnapshot,
   actions: Action[],
-  stepIndex: number
+  stepIndex: number,
+  history?: ActionHistoryEntry[]
 ): Promise<{ executed: number; terminal: 'done' | 'abort' | null; lastError: string | null }> {
   const actuator = new Actuator(ctx.page, snap);
   let executed = 0;
@@ -138,6 +161,7 @@ export async function executeActions(
     } else {
       lastError = res.error ?? 'unknown';
     }
+    if (history) history.push({ step: stepIndex, action: resolved, ok: res.ok, error: res.error });
     // Between actions, a small idle pause helps dynamic forms reveal conditional fields.
     await waitForIdle(ctx.page, 400);
   }
@@ -164,4 +188,49 @@ export async function snapshotWithRetry(page: Page, attempts = 3): Promise<AxSna
     }
   }
   throw lastErr instanceof Error ? lastErr : new Error('snapshot failed');
+}
+
+/**
+ * Fast local check: is the current snapshot already ready to submit?
+ * Mirrors the verifier's scoring but cheaper (no screenshot, no file IO).
+ * Approaches call this before every LLM step to short-circuit to `done`.
+ */
+export function checkReadyToSubmit(snap: AxSnapshot): {
+  ready: boolean;
+  filled: number;
+  total: number;
+  missing: string[];
+  submitFound: boolean;
+  submitEnabled: boolean;
+} {
+  const required = snap.nodes.filter(
+    (n) => n.required && ['textbox', 'combobox', 'checkbox', 'radio', 'file'].includes(n.role)
+  );
+  let filled = 0;
+  const missing: string[] = [];
+  for (const n of required) {
+    if (n.role === 'checkbox' || n.role === 'radio') {
+      const group = snap.nodes.filter(
+        (m) => (m.role === 'checkbox' || m.role === 'radio') && (m.label === n.label || m.name === n.name)
+      );
+      if (group.some((m) => m.checked)) filled += 1;
+      else missing.push(n.name || n.label || '(radio group)');
+      continue;
+    }
+    if (n.role === 'file') {
+      if (n.value) filled += 1;
+      else missing.push(n.name || 'file upload');
+      continue;
+    }
+    if ((n.value && n.value.trim().length > 0) || n.checked) filled += 1;
+    else missing.push(n.name || n.label || n.placeholder || '(unnamed)');
+  }
+  const submit = snap.nodes.find(
+    (n) => (n.role === 'button' || n.tag === 'button' || n.type === 'submit') && /submit|apply|send application|finish/i.test(n.name || n.label || '')
+  );
+  const submitFound = !!submit;
+  const submitEnabled = submit ? !submit.disabled : false;
+  const ratio = required.length === 0 ? 0 : filled / required.length;
+  const ready = required.length > 0 && ratio >= 0.85 && submitFound && submitEnabled && missing.length <= 2;
+  return { ready, filled, total: required.length, missing, submitFound, submitEnabled };
 }
