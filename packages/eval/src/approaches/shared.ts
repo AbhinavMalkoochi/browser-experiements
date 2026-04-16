@@ -130,8 +130,6 @@ export async function executeActions(
   let doneRejected = false;
   for (const a of actions) {
     if (a.kind === 'done') {
-      // Trust but verify: only honor `done` if a fresh local check agrees.
-      // Prevents the LLM from shortcutting past conditional/required fields.
       const fresh = await extractAxSnapshot(ctx.page).catch(() => snap);
       const check = checkReadyToSubmit(fresh);
       if (check.ready) {
@@ -140,6 +138,11 @@ export async function executeActions(
         doneRejected = true;
         lastError = `done rejected: filled=${check.filled}/${check.total} missing=${check.missing.slice(0, 4).join(', ')} submit=${check.submitFound}/${check.submitEnabled}`;
         if (history) history.push({ step: stepIndex, action: a, ok: false, error: lastError });
+        ctx.logStep({
+          step: stepIndex, approach: ctx.approach, tsMs: Date.now(), durationMs: 0,
+          url: ctx.page.url(), actionExecuted: a, executed: false, error: lastError,
+          llmUsage: [], notes: 'done rejected — LLM claimed completion prematurely',
+        });
       }
       break;
     }
@@ -199,6 +202,25 @@ export async function snapshotWithRetry(page: Page, attempts = 3): Promise<AxSna
     }
   }
   throw lastErr instanceof Error ? lastErr : new Error('snapshot failed');
+}
+
+/**
+ * Build a one-line PROGRESS hint the executor can use to decide between
+ * "click Apply", "fill missing field X", and "emit done". This single helper
+ * prevents each approach from rolling its own subtly-different version.
+ */
+export function buildProgressHint(snap: AxSnapshot, ready: ReturnType<typeof checkReadyToSubmit>): string {
+  if (ready.total > 0) {
+    return `PROGRESS: ${ready.filled}/${ready.total} required fields filled. STILL MISSING: ${ready.missing.slice(0, 8).join(', ')}. Submit ${ready.submitFound ? (ready.submitEnabled ? 'visible+enabled' : 'visible but disabled') : 'not yet visible'}. DO NOT emit done until all missing are filled.`;
+  }
+  const applyLike = snap.nodes.find(
+    (n) => (n.role === 'button' || n.role === 'link' || n.tag === 'button') &&
+      /^(apply|i['’]?m interested|i am interested|apply now|start application|continue to application)/i.test((n.name || n.label || '').trim())
+  );
+  if (applyLike) {
+    return `PROGRESS: this is the job posting, not the application form. Click the Apply button first (ref=${applyLike.ref}, name="${applyLike.name || applyLike.label}"). DO NOT emit done.`;
+  }
+  return 'PROGRESS: no required fields detected yet — scroll down or click Apply. DO NOT emit done.';
 }
 
 /**

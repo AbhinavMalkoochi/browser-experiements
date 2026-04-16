@@ -1,0 +1,40 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "lever-whoop",
+  "seed": 0,
+  "startedAt": 1776370739657,
+  "finishedAt": 1776370905443,
+  "durationMs": 165786,
+  "stepsTaken": 6,
+  "actionsExecuted": 11,
+  "totalLlmCalls": 8,
+  "totalInputTokens": 27877,
+  "totalOutputTokens": 1434,
+  "totalCostUsd": 0.00504195,
+  "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 10,
+    "missing": [
+      "Yes",
+      "No",
+      "Yes",
+      "No",
+      "Yes",
+      "No"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.40 filled=4/10 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/lever-whoop/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/lever-whoop/seed-0"
+}

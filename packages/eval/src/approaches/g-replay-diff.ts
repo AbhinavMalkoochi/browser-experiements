@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, confirmReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, buildProgressHint, confirmReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
@@ -137,6 +137,8 @@ export const approachG: Approach = {
               role: 'user',
               content: [
                 `GOAL: ${ctx.task.goal}`,
+                '',
+                buildProgressHint(snap, readyCheck),
                 '',
                 'PROFILE:',
                 profileYaml,

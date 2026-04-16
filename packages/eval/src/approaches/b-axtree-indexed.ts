@@ -1,6 +1,7 @@
 import type { Approach, ApproachCtx } from '../core/types.js';
 import {
   ACTION_DSL_SCHEMA,
+  buildProgressHint,
   confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
@@ -26,9 +27,12 @@ Rules:
 - ref MUST be the numeric string from the snapshot brackets (e.g. "7"). NEVER use semantic names like "email".
 - Do NOT re-fill a field that already has a "FILLED=..." marker — it is already correct. Move on.
 - Do NOT repeat the exact same action that succeeded in the history — move to the next task.
-- Prefer exact option labels on selects/radios. If the profile has no matching option, pick the closest semantic match.
+- For radio buttons: emit {"kind":"check","ref":"<ref-of-the-correct-option>"} — pick the option with the matching name (e.g. "Yes" radio to answer Yes). Do NOT use kind:"select" for radios.
+- For real <select> dropdowns: use {"kind":"select","ref":"<ref>","value":"<exact option label>"}.
+- For combobox / custom dropdowns (role=combobox): use click first, then select the option that appears.
 - For file uploads, set value to the literal string "resume"; the system will resolve the actual file path.
 - When all required fields are filled and a Submit/Apply button is visible and enabled, emit a single action {"kind":"done","status":"ready_to_submit"} — DO NOT click Submit.
+- If the PROGRESS line says fields are still missing, keep filling — do NOT emit done yet.
 - If blocked by CAPTCHA, login wall, or unrecoverable error, emit {"kind":"abort","status":"blocked"}.
 - If two consecutive attempts at the same element fail, try a sibling element or scroll first.
 - Always provide a short "reason".
@@ -86,9 +90,7 @@ export const approachB: Approach = {
         return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       }
 
-      const missingHint = readyCheck.total > 0
-        ? `PROGRESS: ${readyCheck.filled}/${readyCheck.total} required fields filled. STILL MISSING: ${readyCheck.missing.slice(0, 8).join(', ')}. Submit ${readyCheck.submitFound ? 'visible' : 'not yet visible'}.`
-        : 'PROGRESS: no required fields detected yet — you may need to click an Apply button first.';
+      const missingHint = buildProgressHint(snap, readyCheck);
 
       const userPrompt = [
         `GOAL: ${ctx.task.goal}`,

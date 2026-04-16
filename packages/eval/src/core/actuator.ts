@@ -247,6 +247,24 @@ export class Actuator {
           }
           if (action.kind === 'select') {
             if (!action.value) return { ok: false, error: 'select requires value' };
+            // Radio group fallback: if the targeted node is a radio, find the sibling
+            // radio in the same group whose label matches the requested value and click it.
+            if (node?.role === 'radio' || node?.role === 'checkbox') {
+              const want = action.value.trim().toLowerCase();
+              const group = this.snapshot?.nodes.filter(
+                (n) => (n.role === 'radio' || n.role === 'checkbox') && (n.label === node.label || n.name === node.name || n.section === node.section)
+              ) ?? [];
+              const match = group.find(
+                (n) => (n.name || '').trim().toLowerCase() === want || (n.value || '').trim().toLowerCase() === want
+              );
+              if (match) {
+                const mh = await this.resolveHandle(match);
+                if (mh) {
+                  await this.clickWithEventChain(mh);
+                  return { ok: true, note: `radio fallback → ${match.name || match.value}` };
+                }
+              }
+            }
             try {
               await handle.selectOption({ label: action.value });
               return { ok: true };
@@ -255,13 +273,17 @@ export class Actuator {
                 await handle.selectOption(action.value);
                 return { ok: true };
               } catch {
-                // Fall back to click-to-open and pick option by text (custom combobox)
                 await this.clickWithEventChain(handle);
                 await sleep(300);
                 const opt = await this.page.getByRole('option', { name: action.value }).first().elementHandle().catch(() => null);
                 if (opt) {
                   await this.clickWithEventChain(opt);
                   return { ok: true, note: 'combobox fallback' };
+                }
+                const txt = await this.page.getByText(action.value, { exact: true }).first().elementHandle().catch(() => null);
+                if (txt) {
+                  await this.clickWithEventChain(txt);
+                  return { ok: true, note: 'text-click fallback' };
                 }
                 return { ok: false, error: `select option not found: ${action.value}` };
               }

@@ -1,0 +1,33 @@
+{
+  "approach": "e-form-dsl",
+  "taskId": "applytojob-genalyte",
+  "seed": 0,
+  "startedAt": 1776370461672,
+  "finishedAt": 1776370494536,
+  "durationMs": 32864,
+  "stepsTaken": 2,
+  "actionsExecuted": 19,
+  "totalLlmCalls": 2,
+  "totalInputTokens": 3489,
+  "totalOutputTokens": 448,
+  "totalCostUsd": 0.0007921499999999999,
+  "finalUrl": "https://genalyte.applytojob.com/apply/ms4az9EW8x/Software-Engineer-I?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": false,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": false,
+    "submitButtonEnabled": false,
+    "evidence": "ratio=0.00 filled=0/0 submit=false/false submittedLike=false",
+    "classification": "form_not_loaded",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/applytojob-genalyte/seed-0/final.png"
+  },
+  "failureMode": "form_not_loaded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/applytojob-genalyte/seed-0"
+}

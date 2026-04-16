@@ -1,6 +1,7 @@
 import type { Approach, ApproachCtx } from '../core/types.js';
 import {
   ACTION_DSL_SCHEMA,
+  buildProgressHint,
   confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
@@ -118,7 +119,7 @@ export const approachD: Approach = {
               content: [
                 planText,
                 '',
-                `PROGRESS: ${readyCheck.filled}/${readyCheck.total} required filled. Missing: ${readyCheck.missing.slice(0, 8).join(', ')}. Submit ${readyCheck.submitFound ? 'visible' : 'missing'}.`,
+                buildProgressHint(snap, readyCheck),
                 '',
                 'PROFILE:',
                 profileYaml,

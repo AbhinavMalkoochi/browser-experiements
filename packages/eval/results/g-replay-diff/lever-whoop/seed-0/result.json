@@ -2,17 +2,17 @@
   "approach": "g-replay-diff",
   "taskId": "lever-whoop",
   "seed": 0,
-  "startedAt": 1776369721390,
-  "finishedAt": 1776370034556,
-  "durationMs": 313166,
-  "stepsTaken": 8,
-  "actionsExecuted": 20,
-  "totalLlmCalls": 7,
-  "totalInputTokens": 14266,
-  "totalOutputTokens": 2825,
-  "totalCostUsd": 0.0038349000000000005,
+  "startedAt": 1776370539937,
+  "finishedAt": 1776370851032,
+  "durationMs": 311095,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 8,
+  "totalInputTokens": 15777,
+  "totalOutputTokens": 3976,
+  "totalCostUsd": 0.00475215,
   "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
-  "finalStatus": "budget_exceeded",
+  "finalStatus": "timeout",
   "success": false,
   "readyToSubmit": false,
   "verifier": {
@@ -21,9 +21,9 @@
     "requiredFieldsFilled": 7,
     "requiredFieldsTotal": 10,
     "missing": [
-      "No",
-      "No",
-      "No"
+      "Yes",
+      "Yes",
+      "Yes"
     ],
     "submitButtonFound": true,
     "submitButtonEnabled": true,
@@ -31,7 +31,7 @@
     "classification": "partial_filled",
     "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0/final.png"
   },
-  "failureMode": "budget_exceeded",
+  "failureMode": "timeout",
   "error": null,
   "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0"
 }

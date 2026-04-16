@@ -1,0 +1,35 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776370744016,
+  "finishedAt": 1776370778642,
+  "durationMs": 34626,
+  "stepsTaken": 5,
+  "actionsExecuted": 7,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 5361,
+  "totalOutputTokens": 475,
+  "totalCostUsd": 0.0010891499999999999,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/apply/",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 7,
+    "missing": [
+      "file upload"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.86 filled=6/7 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/workable-optisigns/seed-0"
+}

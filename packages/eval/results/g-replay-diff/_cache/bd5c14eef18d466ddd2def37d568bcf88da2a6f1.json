@@ -1,6 +1,6 @@
 {
   "urlPattern": "job-boards.greenhouse.io/ispottv/jobs/*",
-  "createdAt": 1776369757669,
+  "createdAt": 1776370692037,
   "steps": [
     {
       "structuralHash": "812270b7",
@@ -41,14 +41,14 @@
           "value": "United States",
           "enter": null,
           "seconds": null,
-          "reason": "Filling in country.",
+          "reason": "Selecting country.",
           "status": null,
           "sig": "67ae1187"
         },
         {
           "kind": "fill",
           "ref": "13",
-          "value": "415-555-0168",
+          "value": "4155550168",
           "enter": null,
           "seconds": null,
           "reason": "Filling in phone number.",
@@ -86,27 +86,27 @@
           "sig": "48a05376"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "27",
           "value": "Yes",
           "enter": null,
           "seconds": null,
-          "reason": "Indicating eligibility to work in the US.",
+          "reason": "Confirming eligibility to work in the US.",
           "status": null,
           "sig": "7cb1d2bd"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "29",
           "value": "Yes",
           "enter": null,
           "seconds": null,
-          "reason": "Indicating requirement for visa sponsorship.",
+          "reason": "Confirming visa sponsorship requirement.",
           "status": null,
           "sig": "b7ca45d7"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "31",
           "value": "No",
           "enter": null,
@@ -116,7 +116,7 @@
           "sig": "447ed0e1"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "35",
           "value": "Female",
           "enter": null,
@@ -126,32 +126,32 @@
           "sig": "b8a12199"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "37",
           "value": "No",
           "enter": null,
           "seconds": null,
-          "reason": "Indicating not Hispanic/Latino.",
+          "reason": "Confirming not Hispanic/Latino.",
           "status": null,
           "sig": "4d57f905"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "40",
           "value": "I am not a protected veteran",
           "enter": null,
           "seconds": null,
-          "reason": "Indicating veteran status.",
+          "reason": "Filling in veteran status.",
           "status": null,
           "sig": "240afdc1"
         },
         {
-          "kind": "select",
+          "kind": "fill",
           "ref": "43",
           "value": "No, I do not have a disability",
           "enter": null,
           "seconds": null,
-          "reason": "Indicating disability status.",
+          "reason": "Filling in disability status.",
           "status": null,
           "sig": "1204c5cf"
         },
@@ -164,49 +164,165 @@
           "reason": "Uploading resume.",
           "status": null,
           "sig": "55fd0eaf"
+        },
+        {
+          "kind": "wait",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Waiting for form to process before checking for submit button.",
+          "status": null
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filled out completely, ready to submit.",
+          "status": null
         }
       ]
     },
     {
-      "structuralHash": "4dc091f2",
+      "structuralHash": "2faf84b3",
       "actions": [
         {
-          "kind": "fill",
+          "kind": "select",
           "ref": "11",
           "value": "United States",
-          "enter": null,
-          "seconds": null,
-          "reason": "Filling in the country field",
+          "enter": true,
+          "seconds": 1,
+          "reason": "Filling in the Country field.",
           "status": null,
           "sig": "67ae1187"
         },
         {
-          "kind": "fill",
-          "ref": "29",
+          "kind": "select",
+          "ref": "23",
+          "value": "Yes",
+          "enter": true,
+          "seconds": 1,
+          "reason": "Indicating eligibility to work in the US.",
+          "status": null,
+          "sig": "7cb1d2bd"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All required fields are filled, ready to upload resume and stop before submission.",
+          "status": null
+        },
+        {
+          "kind": "upload",
+          "ref": "15",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume.",
+          "status": null,
+          "sig": "7a3f2622"
+        }
+      ]
+    },
+    {
+      "structuralHash": "d76c5fb1",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "24",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling visa sponsorship requirement",
+          "status": null,
+          "sig": "b7ca45d7"
+        },
+        {
+          "kind": "select",
+          "ref": "28",
           "value": "No",
           "enter": null,
           "seconds": null,
-          "reason": "Filling in the current work-in state field",
+          "reason": "Indicating current work-in state is not one of the specified states",
           "status": null,
           "sig": "7dcccbff"
         },
         {
-          "kind": "fill",
-          "ref": "35",
-          "value": "Asian",
+          "kind": "done",
+          "ref": null,
+          "value": null,
           "enter": null,
           "seconds": null,
-          "reason": "Filling in the race field",
+          "reason": "All required fields filled, ready to submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "fdc125c6",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "26",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Confirming that I require visa sponsorship.",
           "status": null,
-          "sig": "4a18827f"
+          "sig": "447ed0e1"
+        },
+        {
+          "kind": "select",
+          "ref": "30",
+          "value": "Female",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in gender information.",
+          "status": null,
+          "sig": "b8a12199"
+        },
+        {
+          "kind": "select",
+          "ref": "32",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating I am not Hispanic/Latino.",
+          "status": null,
+          "sig": "4d57f905"
+        },
+        {
+          "kind": "select",
+          "ref": "35",
+          "value": "I am not a protected veteran",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in veteran status.",
+          "status": null,
+          "sig": "240afdc1"
+        },
+        {
+          "kind": "select",
+          "ref": "38",
+          "value": "No, I do not have a disability",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in disability status.",
+          "status": null,
+          "sig": "1204c5cf"
         },
         {
           "kind": "upload",
-          "ref": "16",
+          "ref": "15",
           "value": "resume",
           "enter": null,
           "seconds": null,
-          "reason": "Uploading the resume",
+          "reason": "Uploading the resume for the application.",
           "status": null,
           "sig": "55fd0eaf"
         },
@@ -216,23 +332,33 @@
           "value": null,
           "enter": null,
           "seconds": null,
-          "reason": "Form filled completely, stopping before submission",
+          "reason": "All fields filled and resume uploaded, ready to submit.",
           "status": null
         }
       ]
     },
     {
-      "structuralHash": "161b2df1",
+      "structuralHash": "df27ffaf",
       "actions": [
         {
-          "kind": "fill",
-          "ref": "11",
-          "value": "United States",
+          "kind": "select",
+          "ref": "22",
+          "value": "Yes",
           "enter": null,
           "seconds": null,
-          "reason": "Filling in the missing country field.",
+          "reason": "Confirming that I do not need visa sponsorship.",
           "status": null,
-          "sig": "67ae1187"
+          "sig": "447ed0e1"
+        },
+        {
+          "kind": "select",
+          "ref": "30",
+          "value": "Asian",
+          "enter": null,
+          "seconds": null,
+          "reason": "Identifying race as Asian.",
+          "status": null,
+          "sig": "4a18827f"
         },
         {
           "kind": "done",
@@ -240,7 +366,31 @@
           "value": null,
           "enter": null,
           "seconds": null,
-          "reason": "Form is now completely filled except for the submit action.",
+          "reason": "All fields filled and resume uploaded; ready to submit.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "34b3505c",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "22",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting 'No' for visa sponsorship requirement.",
+          "status": null,
+          "sig": "447ed0e1"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All required fields filled and resume uploaded, stopping before submission.",
           "status": null
         }
       ]

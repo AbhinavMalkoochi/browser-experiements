@@ -1,0 +1,416 @@
+{
+  "urlPattern": "genalyte.applytojob.com/apply/ms4az9EW8x/Software-Engineer-I",
+  "createdAt": 1776370777708,
+  "steps": [
+    {
+      "structuralHash": "94bd0ad4",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "6",
+          "value": "Priya",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in first name.",
+          "status": null,
+          "sig": "2e49be5e"
+        },
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "Narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in last name.",
+          "status": null,
+          "sig": "f32910e8"
+        },
+        {
+          "kind": "fill",
+          "ref": "8",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in email address.",
+          "status": null,
+          "sig": "ad4941b1"
+        },
+        {
+          "kind": "fill",
+          "ref": "9",
+          "value": "415-555-0168",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in phone number.",
+          "status": null,
+          "sig": "fc32a89e"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in address.",
+          "status": null,
+          "sig": "d87c2512"
+        },
+        {
+          "kind": "fill",
+          "ref": "11",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in city.",
+          "status": null,
+          "sig": "54c9a723"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "California",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in state.",
+          "status": null,
+          "sig": "eec04274"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "95112",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in postal code.",
+          "status": null,
+          "sig": "1235669b"
+        },
+        {
+          "kind": "upload",
+          "ref": "16",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading resume.",
+          "status": null,
+          "sig": "355af359"
+        },
+        {
+          "kind": "select",
+          "ref": "17",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting relocation requirement.",
+          "status": null,
+          "sig": "5c09f206"
+        },
+        {
+          "kind": "fill",
+          "ref": "18",
+          "value": "145000",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in salary expectations.",
+          "status": null,
+          "sig": "2789f756"
+        },
+        {
+          "kind": "select",
+          "ref": "19",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting visa sponsorship requirement.",
+          "status": null,
+          "sig": "f6c30666"
+        },
+        {
+          "kind": "wait",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 1,
+          "reason": "Waiting for form to process.",
+          "status": null
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filled, ready to submit.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "94bd0ad4",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the Address field",
+          "status": null,
+          "sig": "d87c2512"
+        },
+        {
+          "kind": "fill",
+          "ref": "14",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume",
+          "status": null,
+          "sig": "6712182"
+        },
+        {
+          "kind": "fill",
+          "ref": "17",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating willingness to relocate",
+          "status": null,
+          "sig": "5c09f206"
+        },
+        {
+          "kind": "fill",
+          "ref": "18",
+          "value": "145000",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in salary expectations",
+          "status": null,
+          "sig": "2789f756"
+        },
+        {
+          "kind": "fill",
+          "ref": "19",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating visa sponsorship requirement",
+          "status": null,
+          "sig": "f6c30666"
+        },
+        {
+          "kind": "wait",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Waiting for the form to process",
+          "status": null
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled, stopping before final submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "b990dc7b",
+      "actions": [
+        {
+          "kind": "upload",
+          "ref": "15",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume",
+          "status": null,
+          "sig": "355af359"
+        },
+        {
+          "kind": "fill",
+          "ref": "16",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the relocation question",
+          "status": null,
+          "sig": "5c09f206"
+        },
+        {
+          "kind": "fill",
+          "ref": "18",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the visa sponsorship question",
+          "status": null,
+          "sig": "f6c30666"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled except for submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "b990dc7b",
+      "actions": [
+        {
+          "kind": "check",
+          "ref": "21",
+          "value": "true",
+          "enter": null,
+          "seconds": null,
+          "reason": "Check the 'I'm not a robot' checkbox to complete the form filling.",
+          "status": null,
+          "sig": "def3bcf5"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled and ready to submit, stopping before final submission.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "915aabea",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "16",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the relocation requirement",
+          "status": null,
+          "sig": "5c09f206"
+        },
+        {
+          "kind": "fill",
+          "ref": "17",
+          "value": "145000",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the salary expectations",
+          "status": null,
+          "sig": "2789f756"
+        },
+        {
+          "kind": "fill",
+          "ref": "18",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the visa sponsorship requirement",
+          "status": null,
+          "sig": "f6c30666"
+        },
+        {
+          "kind": "upload",
+          "ref": "15",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume",
+          "status": null,
+          "sig": "355af359"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled and resume uploaded, stopping before submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "915aabea",
+      "actions": [
+        {
+          "kind": "check",
+          "ref": "21",
+          "value": "true",
+          "enter": null,
+          "seconds": null,
+          "reason": "Checking the 'I'm not a robot' checkbox to complete the application form.",
+          "status": null,
+          "sig": "def3bcf5"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filled successfully, ready to submit but will stop before final submission.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "915aabea",
+      "actions": [
+        {
+          "kind": "check",
+          "ref": "21",
+          "value": "true",
+          "enter": null,
+          "seconds": null,
+          "reason": "Verifying the 'I'm not a robot' checkbox is checked.",
+          "status": null,
+          "sig": "def3bcf5"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filling is complete, ready to submit but will not submit.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "915aabea",
+      "actions": [
+        {
+          "kind": "check",
+          "ref": "21",
+          "value": "true",
+          "enter": null,
+          "seconds": null,
+          "reason": "Completing the form by checking the 'I'm not a robot' checkbox.",
+          "status": null,
+          "sig": "def3bcf5"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled and ready to submit, stopping before final submission.",
+          "status": null
+        }
+      ]
+    }
+  ]
+}

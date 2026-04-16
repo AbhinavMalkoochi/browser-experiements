@@ -1,0 +1,33 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "applytojob-genalyte",
+  "seed": 0,
+  "startedAt": 1776370779145,
+  "finishedAt": 1776370853365,
+  "durationMs": 74220,
+  "stepsTaken": 7,
+  "actionsExecuted": 21,
+  "totalLlmCalls": 10,
+  "totalInputTokens": 33258,
+  "totalOutputTokens": 1116,
+  "totalCostUsd": 0.0056583,
+  "finalUrl": "https://genalyte.applytojob.com/apply/ms4az9EW8x/Software-Engineer-I?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": false,
+    "submitButtonEnabled": false,
+    "evidence": "ratio=0.00 filled=0/0 submit=false/false submittedLike=false",
+    "classification": "form_not_loaded",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/applytojob-genalyte/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/applytojob-genalyte/seed-0"
+}

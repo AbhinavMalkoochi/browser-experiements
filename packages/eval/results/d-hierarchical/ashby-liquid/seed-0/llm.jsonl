@@ -1,4 +1,4 @@
-{"model":"gpt-4o","inputTokens":1208,"outputTokens":133,"costUsd":0.00435}
-{"model":"gpt-4o-mini","inputTokens":1402,"outputTokens":96,"costUsd":0.00026789999999999995}
-{"model":"gpt-4o-mini","inputTokens":1604,"outputTokens":139,"costUsd":0.000324}
-{"model":"gpt-4o-mini","inputTokens":1684,"outputTokens":198,"costUsd":0.0003714}
+{"model":"gpt-4o","inputTokens":1208,"outputTokens":118,"costUsd":0.0042}
+{"model":"gpt-4o-mini","inputTokens":1385,"outputTokens":94,"costUsd":0.00026415}
+{"model":"gpt-4o-mini","inputTokens":1587,"outputTokens":138,"costUsd":0.00032084999999999997}
+{"model":"gpt-4o-mini","inputTokens":1667,"outputTokens":182,"costUsd":0.00035925}
