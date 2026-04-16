@@ -1,7 +1,7 @@
 import type { Approach, ApproachCtx } from '../core/types.js';
 import {
   ACTION_DSL_SCHEMA,
-  checkReadyToSubmit,
+  confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
   profileToYaml,
@@ -91,7 +91,7 @@ export const approachD: Approach = {
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
 
-      const readyCheck = checkReadyToSubmit(snap);
+      const readyCheck = await confirmReadyToSubmit(ctx.page, snap);
       if (readyCheck.ready) {
         readyToSubmit = true;
         ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });

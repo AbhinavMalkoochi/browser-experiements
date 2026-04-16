@@ -122,14 +122,25 @@ export async function executeActions(
   actions: Action[],
   stepIndex: number,
   history?: ActionHistoryEntry[]
-): Promise<{ executed: number; terminal: 'done' | 'abort' | null; lastError: string | null }> {
+): Promise<{ executed: number; terminal: 'done' | 'abort' | null; lastError: string | null; doneRejected?: boolean }> {
   const actuator = new Actuator(ctx.page, snap);
   let executed = 0;
   let terminal: 'done' | 'abort' | null = null;
   let lastError: string | null = null;
+  let doneRejected = false;
   for (const a of actions) {
     if (a.kind === 'done') {
-      terminal = 'done';
+      // Trust but verify: only honor `done` if a fresh local check agrees.
+      // Prevents the LLM from shortcutting past conditional/required fields.
+      const fresh = await extractAxSnapshot(ctx.page).catch(() => snap);
+      const check = checkReadyToSubmit(fresh);
+      if (check.ready) {
+        terminal = 'done';
+      } else {
+        doneRejected = true;
+        lastError = `done rejected: filled=${check.filled}/${check.total} missing=${check.missing.slice(0, 4).join(', ')} submit=${check.submitFound}/${check.submitEnabled}`;
+        if (history) history.push({ step: stepIndex, action: a, ok: false, error: lastError });
+      }
       break;
     }
     if (a.kind === 'abort') {
@@ -165,7 +176,7 @@ export async function executeActions(
     // Between actions, a small idle pause helps dynamic forms reveal conditional fields.
     await waitForIdle(ctx.page, 400);
   }
-  return { executed, terminal, lastError };
+  return { executed, terminal, lastError, doneRejected };
 }
 
 /** Common executor loop: snapshot → LLM → actions → repeat. */
@@ -188,6 +199,23 @@ export async function snapshotWithRetry(page: Page, attempts = 3): Promise<AxSna
     }
   }
   throw lastErr instanceof Error ? lastErr : new Error('snapshot failed');
+}
+
+/**
+ * Re-check readiness after letting the page settle. If ready-check passes
+ * twice (once immediately and once after a short wait) we trust it. This
+ * prevents premature `done` emissions when late-loading fields appear only
+ * after idle settling (common on Greenhouse, Workday, Workable).
+ */
+export async function confirmReadyToSubmit(
+  page: Page,
+  snap: AxSnapshot
+): Promise<ReturnType<typeof checkReadyToSubmit>> {
+  const first = checkReadyToSubmit(snap);
+  if (!first.ready) return first;
+  await waitForIdle(page, 1500);
+  const fresh = await extractAxSnapshot(page);
+  return checkReadyToSubmit(fresh);
 }
 
 /**

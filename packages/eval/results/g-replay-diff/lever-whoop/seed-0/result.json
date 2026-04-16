@@ -1,0 +1,37 @@
+{
+  "approach": "g-replay-diff",
+  "taskId": "lever-whoop",
+  "seed": 0,
+  "startedAt": 1776369721390,
+  "finishedAt": 1776370034556,
+  "durationMs": 313166,
+  "stepsTaken": 8,
+  "actionsExecuted": 20,
+  "totalLlmCalls": 7,
+  "totalInputTokens": 14266,
+  "totalOutputTokens": 2825,
+  "totalCostUsd": 0.0038349000000000005,
+  "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 7,
+    "requiredFieldsTotal": 10,
+    "missing": [
+      "No",
+      "No",
+      "No"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.70 filled=7/10 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0"
+}

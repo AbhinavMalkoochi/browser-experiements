@@ -334,7 +334,22 @@ export function formatAx(snapshot: AxSnapshot, limit = 120): string {
   lines.push('');
   lines.push('INTERACTABLES:');
   let section = '';
-  const nodes = snapshot.nodes.slice(0, limit);
+  // Prioritize required + empty fields and submit/apply buttons so a limit crop
+  // never hides the next field the agent needs to fill.
+  let nodes = snapshot.nodes;
+  if (nodes.length > limit) {
+    const priority = new Set<string>();
+    for (const n of nodes) {
+      if (n.required) priority.add(n.ref);
+      if ((n.role === 'button' || n.type === 'submit') && /submit|apply|next|continue|finish|send/i.test(n.name || n.label || '')) {
+        priority.add(n.ref);
+      }
+    }
+    const priorityNodes = nodes.filter((n) => priority.has(n.ref));
+    const rest = nodes.filter((n) => !priority.has(n.ref)).slice(0, Math.max(0, limit - priorityNodes.length));
+    const keepSet = new Set([...priorityNodes, ...rest].map((n) => n.ref));
+    nodes = nodes.filter((n) => keepSet.has(n.ref));
+  }
   for (const n of nodes) {
     if (n.section && n.section !== section) {
       section = n.section;

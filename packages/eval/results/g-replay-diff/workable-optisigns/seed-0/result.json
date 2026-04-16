@@ -1,0 +1,33 @@
+{
+  "approach": "g-replay-diff",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776369759116,
+  "finishedAt": 1776369798309,
+  "durationMs": 39193,
+  "stepsTaken": 4,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 3,
+  "totalInputTokens": 3519,
+  "totalOutputTokens": 2100,
+  "totalCostUsd": 0.0017878500000000001,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/workable-optisigns/seed-0"
+}

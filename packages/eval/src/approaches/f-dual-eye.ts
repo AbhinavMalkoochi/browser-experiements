@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, checkReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, confirmReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx } from '../core/ax.js';
 import { renderSetOfMarks } from '../core/som.js';
 import { chat, userTextImage } from '../core/llm.js';
@@ -63,7 +63,7 @@ export const approachF: Approach = {
       lastHash = snap.behaviorHash;
       if (stagnation >= 3) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
 
-      const readyCheck = checkReadyToSubmit(snap);
+      const readyCheck = await confirmReadyToSubmit(ctx.page, snap);
       if (readyCheck.ready) {
         readyToSubmit = true;
         ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });

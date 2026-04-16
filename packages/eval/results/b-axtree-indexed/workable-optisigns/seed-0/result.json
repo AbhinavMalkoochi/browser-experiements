@@ -1,0 +1,33 @@
+{
+  "approach": "b-axtree-indexed",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776369344767,
+  "finishedAt": 1776369378114,
+  "durationMs": 33347,
+  "stepsTaken": 4,
+  "actionsExecuted": 2,
+  "totalLlmCalls": 3,
+  "totalInputTokens": 4482,
+  "totalOutputTokens": 262,
+  "totalCostUsd": 0.0008294999999999999,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "aborted",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": "partial_filled",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/workable-optisigns/seed-0"
+}

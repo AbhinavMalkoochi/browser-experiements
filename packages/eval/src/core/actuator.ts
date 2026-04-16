@@ -1,7 +1,7 @@
 import type { Page, ElementHandle, Frame } from 'playwright';
 import type { AxNode, AxSnapshot } from './ax.js';
 import type { Action } from './types.js';
-import { waitForIdle } from './browser.js';
+import { waitForIdle, dismissOverlays } from './browser.js';
 
 export interface ActResult {
   ok: boolean;
@@ -145,7 +145,26 @@ export class Actuator {
     try {
       await handle.hover({ timeout: 1500 });
     } catch {/* ignore */}
-    await handle.click({ timeout: 8000, delay: 20 + Math.random() * 50 });
+    try {
+      await handle.click({ timeout: 8000, delay: 20 + Math.random() * 50 });
+      return;
+    } catch (e) {
+      // Classic failure mode: a cookie banner / dialog intercepts pointer events.
+      // Dismiss overlays and retry once, then fall back to a forced click.
+      const msg = (e as Error).message;
+      if (/intercepts pointer events|not stable|element is outside|not visible/i.test(msg)) {
+        await dismissOverlays(this.page).catch(() => 0);
+        try {
+          await handle.click({ timeout: 4000, delay: 20 });
+          return;
+        } catch {/* fall through */}
+      }
+      try {
+        await handle.click({ force: true, timeout: 3000 });
+      } catch (e2) {
+        throw e2;
+      }
+    }
   }
 
   private async typeHuman(handle: ElementHandle<Element>, value: string): Promise<void> {

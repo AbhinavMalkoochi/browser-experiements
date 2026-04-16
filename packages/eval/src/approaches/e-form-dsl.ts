@@ -1,5 +1,5 @@
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { checkReadyToSubmit, executeActions, profileToYaml, snapshotWithRetry } from './shared.js';
+import { confirmReadyToSubmit, executeActions, profileToYaml, snapshotWithRetry } from './shared.js';
 import { formatAx, diffSnapshots } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
@@ -115,7 +115,7 @@ export const approachE: Approach = {
       lastHash = snap.behaviorHash;
       if (stagnation >= 2) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit, note: 'no progress after compile' };
 
-      const readyCheck = checkReadyToSubmit(snap);
+      const readyCheck = await confirmReadyToSubmit(ctx.page, snap);
       if (readyCheck.ready) {
         readyToSubmit = true;
         ctx.logStep({ step: steps, approach: ctx.approach, tsMs: Date.now(), durationMs: 0, url: ctx.page.url(), actionExecuted: { kind: 'done', status: 'ready_to_submit', reason: 'local ready-check' }, executed: true, error: null, llmUsage: [], notes: `${readyCheck.filled}/${readyCheck.total}` });

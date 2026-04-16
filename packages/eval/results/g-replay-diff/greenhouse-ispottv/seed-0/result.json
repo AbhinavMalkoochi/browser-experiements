@@ -1,0 +1,33 @@
+{
+  "approach": "g-replay-diff",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776369692561,
+  "finishedAt": 1776369758645,
+  "durationMs": 66084,
+  "stepsTaken": 4,
+  "actionsExecuted": 21,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 6670,
+  "totalOutputTokens": 1618,
+  "totalCostUsd": 0.0019712999999999996,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 6,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=6/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/greenhouse-ispottv/seed-0"
+}

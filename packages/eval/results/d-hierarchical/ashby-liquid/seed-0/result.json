@@ -1,0 +1,33 @@
+{
+  "approach": "d-hierarchical",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776369355045,
+  "finishedAt": 1776369375202,
+  "durationMs": 20157,
+  "stepsTaken": 3,
+  "actionsExecuted": 6,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 5898,
+  "totalOutputTokens": 566,
+  "totalCostUsd": 0.005313299999999999,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/ashby-liquid/seed-0"
+}

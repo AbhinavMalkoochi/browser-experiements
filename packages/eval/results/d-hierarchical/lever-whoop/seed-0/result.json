@@ -1,0 +1,38 @@
+{
+  "approach": "d-hierarchical",
+  "taskId": "lever-whoop",
+  "seed": 0,
+  "startedAt": 1776369378656,
+  "finishedAt": 1776369682522,
+  "durationMs": 303866,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 9,
+  "totalInputTokens": 21147,
+  "totalOutputTokens": 1805,
+  "totalCostUsd": 0.010983099999999999,
+  "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 10,
+    "missing": [
+      "No",
+      "No",
+      "No",
+      "cards[2690853c-4731-41b0-a871-687f8f7b351d][field0]"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.60 filled=6/10 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/lever-whoop/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/lever-whoop/seed-0"
+}

@@ -1,0 +1,33 @@
+{
+  "approach": "d-hierarchical",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776369375793,
+  "finishedAt": 1776369419131,
+  "durationMs": 43338,
+  "stepsTaken": 5,
+  "actionsExecuted": 14,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 9398,
+  "totalOutputTokens": 836,
+  "totalCostUsd": 0.0071001,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/greenhouse-ispottv/seed-0"
+}

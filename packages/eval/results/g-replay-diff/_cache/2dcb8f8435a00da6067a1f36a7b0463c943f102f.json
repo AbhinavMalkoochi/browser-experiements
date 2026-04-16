@@ -1,0 +1,540 @@
+{
+  "urlPattern": "jobs.lever.co/whoop/*/apply",
+  "createdAt": 1776370033736,
+  "steps": [
+    {
+      "structuralHash": "9dfc1876",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "4",
+          "value": "Priya Narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the full name.",
+          "status": null,
+          "sig": "d464c356"
+        },
+        {
+          "kind": "fill",
+          "ref": "5",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the email address.",
+          "status": null,
+          "sig": "59ae8cc1"
+        },
+        {
+          "kind": "fill",
+          "ref": "6",
+          "value": "415-555-0168",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the phone number.",
+          "status": null,
+          "sig": "f8cde486"
+        },
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the current location.",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "8",
+          "value": "Bright Labs",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the current company.",
+          "status": null,
+          "sig": "8d3a9b7a"
+        },
+        {
+          "kind": "fill",
+          "ref": "9",
+          "value": "https://www.linkedin.com/in/priya-narayan-dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the LinkedIn URL.",
+          "status": null,
+          "sig": "a2a8aa30"
+        },
+        {
+          "kind": "fill",
+          "ref": "11",
+          "value": "https://github.com/priya-narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the GitHub URL.",
+          "status": null,
+          "sig": "be9c0142"
+        },
+        {
+          "kind": "fill",
+          "ref": "20",
+          "value": "Software engineer with ~2 years of industry experience in TypeScript, Python, Go, React/Next.js, Node.js, PostgreSQL, and AWS/GCP. Focus on reliability, developer experience, and automation. Currently on F-1 STEM OPT; open to relocate anywhere in the US.",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the summary.",
+          "status": null,
+          "sig": "aed35eca"
+        },
+        {
+          "kind": "select",
+          "ref": "21",
+          "value": "Female",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting gender.",
+          "status": null,
+          "sig": "1c0a6986"
+        },
+        {
+          "kind": "select",
+          "ref": "23",
+          "value": "Asian (Not Hispanic or Latino)",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting race.",
+          "status": null,
+          "sig": "8dee194a"
+        },
+        {
+          "kind": "select",
+          "ref": "24",
+          "value": "I am not a veteran",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting veteran status.",
+          "status": null,
+          "sig": "f9f1f792"
+        },
+        {
+          "kind": "check",
+          "ref": "14",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating work authorization.",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "check",
+          "ref": "16",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating willingness to relocate.",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "check",
+          "ref": "18",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Indicating sponsorship requirement.",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "upload",
+          "ref": "3",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume.",
+          "status": null,
+          "sig": "9985f855"
+        }
+      ]
+    },
+    {
+      "structuralHash": "a4f64a02",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current location",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "8",
+          "value": "Bright Labs",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current company",
+          "status": null,
+          "sig": "8d3a9b7a"
+        },
+        {
+          "kind": "fill",
+          "ref": "9",
+          "value": "https://www.linkedin.com/in/priya-narayan-dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling LinkedIn URL",
+          "status": null,
+          "sig": "a2a8aa30"
+        },
+        {
+          "kind": "fill",
+          "ref": "11",
+          "value": "https://github.com/priya-narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling GitHub URL",
+          "status": null,
+          "sig": "be9c0142"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "https://priyanarayan.dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Portfolio URL",
+          "status": null,
+          "sig": "9ef05fe"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "https://priyanarayan.dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Other website",
+          "status": null,
+          "sig": "1d4645da"
+        },
+        {
+          "kind": "check",
+          "ref": "14",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Checking if I am legally authorized to work",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "check",
+          "ref": "16",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Checking if I will require sponsorship",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "check",
+          "ref": "18",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Checking if I am willing to relocate",
+          "status": null,
+          "sig": "7192c0e1"
+        },
+        {
+          "kind": "fill",
+          "ref": "20",
+          "value": "Software engineer with ~2 years of industry experience in TypeScript, Python, Go, React/Next.js, Node.js, PostgreSQL, and AWS/GCP. Focus on reliability, developer experience, and automation. Currently on F-1 STEM OPT; open to relocate anywhere in the US.",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling summary",
+          "status": null,
+          "sig": "aed35eca"
+        },
+        {
+          "kind": "fill",
+          "ref": "21",
+          "value": "Female",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling gender",
+          "status": null,
+          "sig": "1c0a6986"
+        },
+        {
+          "kind": "fill",
+          "ref": "23",
+          "value": "Asian (Not Hispanic or Latino)",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling race",
+          "status": null,
+          "sig": "8dee194a"
+        },
+        {
+          "kind": "fill",
+          "ref": "24",
+          "value": "I am not a veteran",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling veteran status",
+          "status": null,
+          "sig": "f9f1f792"
+        },
+        {
+          "kind": "wait",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Waiting for the form to process",
+          "status": null
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filled, ready to submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "38967880",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current location",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "9",
+          "value": "https://www.linkedin.com/in/priya-narayan-dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling LinkedIn URL",
+          "status": null,
+          "sig": "a2a8aa30"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Twitter URL",
+          "status": null,
+          "sig": "aed2d062"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Portfolio URL",
+          "status": null,
+          "sig": "9ef05fe"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Other website",
+          "status": null,
+          "sig": "1d4645da"
+        },
+        {
+          "kind": "upload",
+          "ref": "3",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading resume",
+          "status": null,
+          "sig": "120d3bc1"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled and resume uploaded, stopping before submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "38d45aec",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current location",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Twitter URL",
+          "status": null,
+          "sig": "aed2d062"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "https://priyanarayan.dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling portfolio URL",
+          "status": null,
+          "sig": "9ef05fe"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling other website",
+          "status": null,
+          "sig": "1d4645da"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled except submit",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "38d45aec",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current location",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Twitter URL",
+          "status": null,
+          "sig": "aed2d062"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "https://priyanarayan.dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Portfolio URL",
+          "status": null,
+          "sig": "9ef05fe"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Form filling completed, waiting for submit button to appear",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "38d45aec",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "7",
+          "value": "San Jose, CA, USA",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling current location",
+          "status": null,
+          "sig": "395cd5c2"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "https://priyanarayan.dev",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling portfolio URL",
+          "status": null,
+          "sig": "9ef05fe"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Twitter URL",
+          "status": null,
+          "sig": "aed2d062"
+        },
+        {
+          "kind": "upload",
+          "ref": "3",
+          "value": "resume",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading resume",
+          "status": null,
+          "sig": "120d3bc1"
+        },
+        {
+          "kind": "done",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "All fields filled and resume uploaded, stopping before submit",
+          "status": null
+        }
+      ]
+    }
+  ]
+}

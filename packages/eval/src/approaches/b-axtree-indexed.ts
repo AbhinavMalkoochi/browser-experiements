@@ -1,7 +1,7 @@
 import type { Approach, ApproachCtx } from '../core/types.js';
 import {
   ACTION_DSL_SCHEMA,
-  checkReadyToSubmit,
+  confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
   profileToYaml,
@@ -68,8 +68,7 @@ export const approachB: Approach = {
         return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       }
 
-      // Short-circuit: if form is already ready to submit, stop now instead of calling LLM.
-      const readyCheck = checkReadyToSubmit(snap);
+      const readyCheck = await confirmReadyToSubmit(ctx.page, snap);
       if (readyCheck.ready) {
         readyToSubmit = true;
         ctx.logStep({

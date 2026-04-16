@@ -1,0 +1,33 @@
+{
+  "approach": "e-form-dsl",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776369619964,
+  "finishedAt": 1776369923817,
+  "durationMs": 303853,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 2,
+  "totalInputTokens": 3381,
+  "totalOutputTokens": 1741,
+  "totalCostUsd": 0.00155175,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/workable-optisigns/seed-0"
+}

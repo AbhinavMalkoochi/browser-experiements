@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { openSession } from './browser.js';
+import { openSession, dismissOverlays } from './browser.js';
 import { verify } from './verifier.js';
 import type { Approach, ApproachCtx, EvalTask, LlmUsage, RunResult, StepRecord, TestProfile } from './types.js';
 import { ENV } from '../env.js';
@@ -50,6 +50,8 @@ export async function runOne(opts: RunOptions): Promise<RunResult> {
       await session.page.goto(opts.task.url, { waitUntil: 'domcontentloaded' });
     });
     await session.page.waitForTimeout(1500);
+    // Auto-dismiss cookie/GDPR banners and similar click-blocking overlays.
+    await dismissOverlays(session.page).catch(() => 0);
 
     const ctx: ApproachCtx = {
       page: session.page,
@@ -83,7 +85,11 @@ export async function runOne(opts: RunOptions): Promise<RunResult> {
     err = (e as Error).message;
   }
 
-  // Verification — always do this even on crash.
+  // Verification — always do this even on crash. Brief settle so late-loading
+  // fields / transitions finish before we count required fields.
+  try {
+    await session.page.waitForLoadState('networkidle', { timeout: 4000 });
+  } catch {/* ignore */}
   let verifier;
   try {
     verifier = await verify(session.page, opts.task, artifactDir);
