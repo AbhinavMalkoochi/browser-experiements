@@ -172,6 +172,13 @@ export interface RunResult {
   artifactDir: string;
 }
 
+/** Optional structured run log (see `run-log.ts`); writes `run.log` under artifactDir. */
+export interface RunLog {
+  info(msg: string, data?: Record<string, unknown>): void;
+  warn(msg: string, data?: Record<string, unknown>): void;
+  error(msg: string, data?: Record<string, unknown>): void;
+}
+
 export interface ApproachCtx {
   page: Page;
   task: EvalTask;
@@ -188,6 +195,10 @@ export interface ApproachCtx {
   maxSteps: number;
   /** Shared replay cache dir (per approach). */
   cacheDir: string;
+  /** Set when the outer harness hits TASK_TIMEOUT_MS; loops should exit quickly. */
+  abortSignal?: AbortSignal;
+  /** Human-readable debug log for this run. */
+  runLog?: RunLog;
 }
 
 export interface Approach {

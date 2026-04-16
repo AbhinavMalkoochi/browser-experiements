@@ -4,6 +4,11 @@ import { extractAxSnapshot, type AxSnapshot } from '../core/ax.js';
 import { Actuator } from '../core/actuator.js';
 import { waitForIdle } from '../core/browser.js';
 
+/** True when the harness aborted this run (e.g. task timeout). Exit loops quickly. */
+export function isRunCancelled(ctx: ApproachCtx): boolean {
+  return ctx.abortSignal?.aborted === true;
+}
+
 /**
  * JSON schema for the typed action DSL. Used by approaches B/D/F for
  * strict OpenAI structured-output decoding.
@@ -150,11 +155,40 @@ export async function executeActions(
       terminal = 'abort';
       break;
     }
+    if (isRunCancelled(ctx)) {
+      lastError = 'cancelled';
+      break;
+    }
     // Inject resume path
     const resolved: Action = { ...a };
+    // LLMs sometimes emit semantic refs ("email", "gender"); actuator only resolves numeric AX refs.
+    if (
+      resolved.ref &&
+      !/^\d+$/.test(String(resolved.ref)) &&
+      ['click', 'fill', 'select', 'check', 'upload'].includes(resolved.kind)
+    ) {
+      const bad = String(resolved.ref);
+      lastError = `invalid ref "${bad}" (must be numeric string from snapshot, e.g. "12")`;
+      ctx.runLog?.warn('invalid_ref', { kind: resolved.kind, ref: bad });
+      ctx.logStep({
+        step: stepIndex,
+        approach: ctx.approach,
+        tsMs: Date.now(),
+        durationMs: 0,
+        url: ctx.page.url(),
+        actionExecuted: resolved,
+        executed: false,
+        error: lastError,
+        llmUsage: [],
+        notes: 'rejected non-numeric ref',
+      });
+      if (history) history.push({ step: stepIndex, action: resolved, ok: false, error: lastError });
+      continue;
+    }
     if (resolved.kind === 'upload' && (!resolved.value || resolved.value === 'resume' || resolved.value === 'RESUME' || resolved.value === '<resume>')) {
       resolved.value = ctx.profile.resumePath;
     }
+    ctx.runLog?.info('execute', { kind: resolved.kind, ref: resolved.ref ?? null, index: resolved.index ?? null });
     const t0 = Date.now();
     const res = await actuator.execute(resolved);
     const dur = Date.now() - t0;

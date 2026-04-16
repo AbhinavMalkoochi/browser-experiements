@@ -5,6 +5,7 @@ import {
   confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
+  isRunCancelled,
   profileToYaml,
   snapshotWithRetry,
   type ActionHistoryEntry,
@@ -51,7 +52,11 @@ export const approachB: Approach = {
     const profileYaml = profileToYaml(ctx.profile);
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) {
+        return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
+      }
       steps += 1;
+      ctx.runLog?.info('loop', { step: steps, maxSteps: ctx.maxSteps });
       const snap = await snapshotWithRetry(ctx.page);
       if (snap.behaviorHash === lastBehaviorHash) stagnationCount += 1;
       else stagnationCount = 0;
@@ -152,6 +157,7 @@ export const approachB: Approach = {
 
       const res = await executeActions(ctx, snap, parsed.actions, steps, history);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) stagnationCount = 0;
 
       if (res.terminal === 'done') {
         readyToSubmit = true;

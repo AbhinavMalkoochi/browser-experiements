@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
 import { renderSetOfMarks } from '../core/som.js';
-import { snapshotWithRetry, profileToYaml, executeActions, formatActionHistory, type ActionHistoryEntry } from './shared.js';
+import { snapshotWithRetry, profileToYaml, executeActions, formatActionHistory, isRunCancelled, type ActionHistoryEntry } from './shared.js';
 import { chat, userTextImage } from '../core/llm.js';
 import { ENV } from '../env.js';
 
@@ -45,6 +45,7 @@ export const approachC: Approach = {
     const profileYaml = profileToYaml(ctx.profile);
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
       if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
@@ -98,6 +99,7 @@ export const approachC: Approach = {
       });
       const res = await executeActions(ctx, snap, translated, steps, history);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) stagnation = 0;
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
       if (res.terminal === 'abort') return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
     }

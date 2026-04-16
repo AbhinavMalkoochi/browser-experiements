@@ -5,6 +5,7 @@ import {
   confirmReadyToSubmit,
   executeActions,
   formatActionHistory,
+  isRunCancelled,
   profileToYaml,
   snapshotWithRetry,
   type ActionHistoryEntry,
@@ -89,6 +90,7 @@ export const approachD: Approach = {
     const history: ActionHistoryEntry[] = [];
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
 
@@ -142,6 +144,7 @@ export const approachD: Approach = {
       if (!out.json) continue;
       const res = await executeActions(ctx, snap, out.json.actions, steps, history);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) noChangeCount = 0;
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
       if (res.terminal === 'abort') return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
     }

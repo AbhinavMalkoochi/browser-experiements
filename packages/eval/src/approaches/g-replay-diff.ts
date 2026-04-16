@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, buildProgressHint, confirmReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, buildProgressHint, confirmReadyToSubmit, executeActions, formatActionHistory, isRunCancelled, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
@@ -80,6 +80,7 @@ export const approachG: Approach = {
     const history: ActionHistoryEntry[] = [];
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
       if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
@@ -171,6 +172,7 @@ export const approachG: Approach = {
 
       const res = await executeActions(ctx, snap, actions, steps, history);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) stagnation = 0;
       if (res.terminal === 'done') {
         readyToSubmit = true;
         await writeCache(ctx.cacheDir, { urlPattern: urlPat, createdAt: Date.now(), steps: recorded }).catch(() => {});

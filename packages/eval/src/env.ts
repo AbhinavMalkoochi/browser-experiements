@@ -22,6 +22,8 @@ export const ENV = {
   STEP_TIMEOUT_MS: Number(process.env.STEP_TIMEOUT_MS ?? '20000'),
   TASK_TIMEOUT_MS: Number(process.env.TASK_TIMEOUT_MS ?? '300000'),
   CONCURRENCY: Number(process.env.CONCURRENCY ?? '2'),
+  /** Mirror per-run `run.log` lines to stdout (also enable with CLI `--verbose`). */
+  EVAL_VERBOSE: (process.env.EVAL_VERBOSE ?? 'false').toLowerCase() === 'true',
 };
 
 if (!ENV.OPENAI_API_KEY) {

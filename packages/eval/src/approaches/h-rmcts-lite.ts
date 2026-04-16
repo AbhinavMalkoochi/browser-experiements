@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { ACTION_DSL_SCHEMA, confirmReadyToSubmit, executeActions, formatActionHistory, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
+import { ACTION_DSL_SCHEMA, confirmReadyToSubmit, executeActions, formatActionHistory, isRunCancelled, profileToYaml, snapshotWithRetry, type ActionHistoryEntry, type DslOutput } from './shared.js';
 import { formatAx, diffSnapshots } from '../core/ax.js';
 import { chat, userTextImage } from '../core/llm.js';
 import { screenshotDataUrl } from '../core/browser.js';
@@ -51,6 +51,7 @@ export const approachH: Approach = {
     const history: ActionHistoryEntry[] = [];
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       steps += 1;
       const beforeSnap = await snapshotWithRetry(ctx.page);
       if (beforeSnap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
@@ -95,6 +96,7 @@ export const approachH: Approach = {
 
       const res = await executeActions(ctx, beforeSnap, propose.json.actions, steps, history);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) stagnation = 0;
 
       if (res.terminal === 'done') { readyToSubmit = true; return { finalStatus: 'done', stepsTaken: steps, actionsExecuted: executed, readyToSubmit }; }
       if (res.terminal === 'abort') return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
@@ -144,6 +146,7 @@ export const approachH: Approach = {
         };
         const retry = await executeActions(ctx, afterSnap, [altAction], steps, history);
         executed += retry.executed;
+        if (retry.executed > 0) stagnation = 0;
       }
     }
     return { finalStatus: readyToSubmit ? 'done' : 'budget_exceeded', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };

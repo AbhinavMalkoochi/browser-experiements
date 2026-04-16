@@ -1,5 +1,5 @@
 import type { Approach, ApproachCtx, Action } from '../core/types.js';
-import { confirmReadyToSubmit, executeActions, profileToYaml, snapshotWithRetry } from './shared.js';
+import { confirmReadyToSubmit, executeActions, isRunCancelled, profileToYaml, snapshotWithRetry } from './shared.js';
 import { formatAx, diffSnapshots } from '../core/ax.js';
 import { chat } from '../core/llm.js';
 import { ENV } from '../env.js';
@@ -109,6 +109,7 @@ export const approachE: Approach = {
     const profileYaml = profileToYaml(ctx.profile);
 
     while (steps < ctx.maxSteps) {
+      if (isRunCancelled(ctx)) return { finalStatus: 'aborted', stepsTaken: steps, actionsExecuted: executed, readyToSubmit };
       steps += 1;
       const snap = await snapshotWithRetry(ctx.page);
       if (snap.behaviorHash === lastHash) stagnation++; else stagnation = 0;
@@ -165,6 +166,7 @@ export const approachE: Approach = {
 
       const res = await executeActions(ctx, snap, actions, steps);
       executed += res.executed;
+      if (res.doneRejected || res.executed > 0) stagnation = 0;
 
       // After compile, if the page said ready_to_submit, verify then finish.
       if (spec.terminal === 'ready_to_submit') {

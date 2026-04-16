@@ -81,12 +81,16 @@ async function cmdRun(args: CliArgs) {
       const started = Date.now();
       console.log(`[w${id}] START ${job.approach.name} / ${job.task.id} / seed=${job.seed}`);
       try {
+        const maxStepsRaw = args['max-steps'] ?? args.maxSteps;
+        const maxSteps = maxStepsRaw !== undefined && maxStepsRaw !== true ? Number(maxStepsRaw) : undefined;
         const r = await runOne({
           approach: job.approach,
           task: job.task,
           profile: TEST_PROFILE,
           seed: job.seed,
           resultsRoot: RESULTS_ROOT,
+          maxSteps: Number.isFinite(maxSteps) ? maxSteps : undefined,
+          verbose: args.verbose === true,
         });
         allResults.push(r);
         done++;
@@ -164,7 +168,7 @@ async function main() {
   else {
     console.log('Usage:');
     console.log('  pnpm eval list');
-    console.log('  pnpm eval run --approach a[,b,...] --task id1[,id2] [--all] [--seeds N] [--concurrency N]');
+    console.log('  pnpm eval run --approach a[,b,...] --task id1[,id2] [--all] [--seeds N] [--concurrency N] [--verbose] [--max-steps N]');
     console.log('  pnpm eval report');
   }
 }

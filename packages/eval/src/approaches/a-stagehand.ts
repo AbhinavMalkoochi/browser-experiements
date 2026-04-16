@@ -36,6 +36,7 @@ export const approachA: Approach = {
     let executed = 0;
     let readyToSubmit = false;
     try {
+      ctx.runLog?.info('stagehand_start', { url: ctx.task.url });
       await stagehand.init();
       const page = stagehand.page;
       await page.goto(ctx.task.url, { waitUntil: 'domcontentloaded' });
@@ -64,7 +65,10 @@ export const approachA: Approach = {
         maxSteps: Math.min(30, ctx.maxSteps),
       }).catch((e: Error) => ({ success: false, message: e.message, usage: null }));
 
-      steps = (agentResult as { completed?: number }).completed ?? (agentResult as { steps?: number }).steps ?? 0;
+      // Stagehand may set `completed` to boolean false — never treat as a step count.
+      const rawC = (agentResult as { completed?: unknown }).completed;
+      const rawS = (agentResult as { steps?: unknown }).steps;
+      steps = typeof rawC === 'number' ? rawC : typeof rawS === 'number' ? rawS : 0;
       executed = steps;
       const msg = String((agentResult as { message?: string }).message ?? '').toLowerCase();
       readyToSubmit = !!(agentResult as { success?: boolean }).success && !msg.includes('block') && !msg.includes('captcha');
@@ -83,8 +87,8 @@ export const approachA: Approach = {
         // Conservative estimate: Stagehand's agent typically uses ~12k-30k tokens per application.
         const u: LlmUsage = {
           model: ENV.EXECUTOR_MODEL,
-          inputTokens: 12000 + 800 * steps,
-          outputTokens: 300 * steps,
+          inputTokens: 12000 + 800 * Math.max(0, steps),
+          outputTokens: 300 * Math.max(0, steps),
         };
         u.costUsd = estimateCostUsd(u.model, u.inputTokens, u.outputTokens);
         ctx.logLlm(u);

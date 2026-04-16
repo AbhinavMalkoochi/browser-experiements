@@ -10,6 +10,7 @@ packages/eval/results/**/runs/**
 packages/eval/results/**/*.png
 packages/eval/results/**/*.mp4
 packages/eval/results/**/*.har
+packages/eval/results/**/run.log
 packages/eval/.playwright/
 packages/eval/.cache/
 # but keep summary + report
