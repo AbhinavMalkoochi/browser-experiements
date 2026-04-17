@@ -26,6 +26,9 @@ function quantile(xs: number[], q: number): number {
 
 export function summarize(results: RunResult[]): {
   byApproach: SummaryTableRow[];
+  byFamily: Array<{ family: string; runs: number; successRate: number; readyRate: number; avgCostUsd: number; medianDurationMs: number }>;
+  byObservationMode: Array<{ observationMode: string; runs: number; successRate: number; readyRate: number; avgCostUsd: number; medianDurationMs: number }>;
+  repeatability: Array<{ approach: string; repeatSuccessRate: number; repeatReadyRate: number; taskGroups: number }>;
   byTask: Record<string, Record<string, { success: boolean; cost: number; duration: number; failureMode: string | null; readyToSubmit: boolean }>>;
   totalCostUsd: number;
 } {
@@ -72,6 +75,67 @@ export function summarize(results: RunResult[]): {
   }
   byApproach.sort((a, b) => b.readyRate - a.readyRate || b.successRate - a.successRate || a.avgCostUsd - b.avgCostUsd);
 
+  function summarizeDimension(key: (r: RunResult) => string | null) {
+    const groupedDim = new Map<string, RunResult[]>();
+    for (const r of results) {
+      const k = key(r);
+      if (!k) continue;
+      const arr = groupedDim.get(k) ?? [];
+      arr.push(r);
+      groupedDim.set(k, arr);
+    }
+    return [...groupedDim.entries()].map(([name, arr]) => ({
+      name,
+      runs: arr.length,
+      successRate: arr.filter((r) => r.success).length / Math.max(1, arr.length),
+      readyRate: arr.filter((r) => r.readyToSubmit).length / Math.max(1, arr.length),
+      avgCostUsd: arr.reduce((s, r) => s + r.totalCostUsd, 0) / Math.max(1, arr.length),
+      medianDurationMs: quantile(arr.map((r) => r.durationMs), 0.5),
+    })).sort((a, b) => b.readyRate - a.readyRate || b.successRate - a.successRate || a.avgCostUsd - b.avgCostUsd);
+  }
+
+  const byFamily = summarizeDimension((r) => r.experiment?.family ?? null).map((r) => ({
+    family: r.name,
+    runs: r.runs,
+    successRate: r.successRate,
+    readyRate: r.readyRate,
+    avgCostUsd: r.avgCostUsd,
+    medianDurationMs: r.medianDurationMs,
+  }));
+
+  const byObservationMode = summarizeDimension((r) => r.experiment?.observationMode ?? null).map((r) => ({
+    observationMode: r.name,
+    runs: r.runs,
+    successRate: r.successRate,
+    readyRate: r.readyRate,
+    avgCostUsd: r.avgCostUsd,
+    medianDurationMs: r.medianDurationMs,
+  }));
+
+  const repeatabilityMap = new Map<string, RunResult[]>();
+  for (const r of results) {
+    const k = `${r.approach}|${r.taskId}`;
+    const arr = repeatabilityMap.get(k) ?? [];
+    arr.push(r);
+    repeatabilityMap.set(k, arr);
+  }
+  const repeatabilityByApproach = new Map<string, Array<{ repeatSuccess: number; repeatReady: number }>>();
+  for (const [k, arr] of repeatabilityMap) {
+    const [approach] = k.split('|');
+    const groups = repeatabilityByApproach.get(approach!) ?? [];
+    groups.push({
+      repeatSuccess: arr.every((r) => r.success) ? 1 : 0,
+      repeatReady: arr.every((r) => r.readyToSubmit) ? 1 : 0,
+    });
+    repeatabilityByApproach.set(approach!, groups);
+  }
+  const repeatability = [...repeatabilityByApproach.entries()].map(([approach, arr]) => ({
+    approach,
+    repeatSuccessRate: arr.reduce((s, x) => s + x.repeatSuccess, 0) / Math.max(1, arr.length),
+    repeatReadyRate: arr.reduce((s, x) => s + x.repeatReady, 0) / Math.max(1, arr.length),
+    taskGroups: arr.length,
+  })).sort((a, b) => b.repeatReadyRate - a.repeatReadyRate || b.repeatSuccessRate - a.repeatSuccessRate);
+
   const byTask: Record<string, Record<string, { success: boolean; cost: number; duration: number; failureMode: string | null; readyToSubmit: boolean }>> = {};
   for (const r of results) {
     if (!byTask[r.taskId]) byTask[r.taskId] = {};
@@ -85,7 +149,7 @@ export function summarize(results: RunResult[]): {
   }
   const totalCostUsd = results.reduce((s, r) => s + r.totalCostUsd, 0);
 
-  return { byApproach, byTask, totalCostUsd };
+  return { byApproach, byFamily, byObservationMode, repeatability, byTask, totalCostUsd };
 }
 
 export async function writeReport(resultsRoot: string, results: RunResult[]): Promise<string> {
@@ -165,6 +229,30 @@ export async function writeReport(resultsRoot: string, results: RunResult[]): Pr
   </tbody>
 </table>
 
+<h2>Family leaderboard</h2>
+<table>
+  <thead><tr><th>Family</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th><th class="num">Med dur (s)</th><th class="num">Avg cost ($)</th></tr></thead>
+  <tbody>
+  ${summary.byFamily.map((r) => `<tr><td>${r.family}</td><td class="num">${r.runs}</td><td class="num">${(r.successRate * 100).toFixed(0)}%</td><td class="num">${(r.readyRate * 100).toFixed(0)}%</td><td class="num">${(r.medianDurationMs / 1000).toFixed(1)}</td><td class="num">${r.avgCostUsd.toFixed(4)}</td></tr>`).join('\n')}
+  </tbody>
+</table>
+
+<h2>Observation-mode leaderboard</h2>
+<table>
+  <thead><tr><th>Mode</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th><th class="num">Med dur (s)</th><th class="num">Avg cost ($)</th></tr></thead>
+  <tbody>
+  ${summary.byObservationMode.map((r) => `<tr><td>${r.observationMode}</td><td class="num">${r.runs}</td><td class="num">${(r.successRate * 100).toFixed(0)}%</td><td class="num">${(r.readyRate * 100).toFixed(0)}%</td><td class="num">${(r.medianDurationMs / 1000).toFixed(1)}</td><td class="num">${r.avgCostUsd.toFixed(4)}</td></tr>`).join('\n')}
+  </tbody>
+</table>
+
+<h2>Repeatability</h2>
+<table>
+  <thead><tr><th>Approach</th><th class="num">Task groups</th><th class="num">Repeat success</th><th class="num">Repeat ready</th></tr></thead>
+  <tbody>
+  ${summary.repeatability.map((r) => `<tr><td>${r.approach}</td><td class="num">${r.taskGroups}</td><td class="num">${(r.repeatSuccessRate * 100).toFixed(0)}%</td><td class="num">${(r.repeatReadyRate * 100).toFixed(0)}%</td></tr>`).join('\n')}
+  </tbody>
+</table>
+
 <h2>Per-task heatmap (cells: success/total · ready/total)</h2>
 <table>
   <thead><tr><th>Approach</th>${tasks.map((t) => `<th>${t}</th>`).join('')}</tr></thead>
@@ -189,7 +277,7 @@ export async function writeReport(resultsRoot: string, results: RunResult[]): Pr
   <thead><tr>
     <th>Approach</th><th>Task</th><th>Seed</th><th>Success</th><th>Ready</th>
     <th class="num">Dur (s)</th><th class="num">Cost ($)</th><th class="num">LLM</th><th class="num">Steps</th>
-    <th>Failure</th><th>Evidence</th>
+    <th>Mode</th><th>Family</th><th>Failure</th><th>Evidence</th>
   </tr></thead>
   <tbody>
   ${results
@@ -204,6 +292,8 @@ export async function writeReport(resultsRoot: string, results: RunResult[]): Pr
       <td class="num">${r.totalCostUsd.toFixed(4)}</td>
       <td class="num">${r.totalLlmCalls}</td>
       <td class="num">${r.stepsTaken}</td>
+      <td>${r.experiment?.observationMode ?? ''}</td>
+      <td>${r.experiment?.family ?? ''}</td>
       <td>${r.failureMode ?? ''}</td>
       <td class="muted">${escapeHtml(r.verifier.evidence)}</td>
     </tr>`

@@ -149,6 +149,7 @@ export async function runOne(opts: RunOptions): Promise<RunResult> {
 
   const result: RunResult = {
     approach: opts.approach.name,
+    description: opts.approach.description,
     taskId: opts.task.id,
     seed: opts.seed,
     startedAt,
@@ -168,6 +169,7 @@ export async function runOne(opts: RunOptions): Promise<RunResult> {
     failureMode: verifier.success ? null : failureModeOf(verifier.classification, finalStatus),
     error: err,
     artifactDir,
+    experiment: opts.approach.experiment,
   };
   await fs.writeFile(path.join(artifactDir, 'result.json'), JSON.stringify(result, null, 2));
   return result;

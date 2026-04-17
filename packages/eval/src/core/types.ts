@@ -151,6 +151,7 @@ export interface VerifierResult {
 
 export interface RunResult {
   approach: string;
+  description?: string;
   taskId: string;
   seed: number;
   startedAt: number;
@@ -170,6 +171,7 @@ export interface RunResult {
   failureMode: string | null;
   error: string | null;
   artifactDir: string;
+  experiment?: ExperimentConfig;
 }
 
 /** Optional structured run log (see `run-log.ts`); writes `run.log` under artifactDir. */
@@ -205,6 +207,8 @@ export interface Approach {
   name: string;
   /** Short description printed in the report. */
   description: string;
+  /** Optional experiment metadata used by reports/leaderboards. */
+  experiment?: ExperimentConfig;
   /** Returns a final status. */
   run(ctx: ApproachCtx): Promise<{
     finalStatus: 'done' | 'aborted' | 'crashed' | 'budget_exceeded';
@@ -213,4 +217,16 @@ export interface Approach {
     readyToSubmit: boolean;
     note?: string;
   }>;
+}
+
+export type ObservationMode = 'raw_ax' | 'canonical' | 'vision_som' | 'hybrid';
+export type PlannerMode = 'single_loop' | 'planner_executor' | 'field_state';
+export type RecoveryMode = 'none' | 'replay_diff' | 'selective_vision' | 'local_verify';
+
+export interface ExperimentConfig {
+  family: string;
+  observationMode: ObservationMode;
+  plannerMode: PlannerMode;
+  recoveryMode: RecoveryMode;
+  notes?: string;
 }

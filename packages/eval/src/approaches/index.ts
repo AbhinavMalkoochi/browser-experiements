@@ -7,6 +7,7 @@ import { approachF } from './f-dual-eye.js';
 import { approachG } from './g-replay-diff.js';
 import { approachH } from './h-rmcts-lite.js';
 import { approachA } from './a-stagehand.js';
+import { approachI, approachJ, approachK, approachL, approachM, approachN } from './i-experimental-families.js';
 
 export const APPROACHES: Record<string, Approach> = {
   a: approachA,
@@ -17,6 +18,12 @@ export const APPROACHES: Record<string, Approach> = {
   f: approachF,
   g: approachG,
   h: approachH,
+  i: approachI,
+  j: approachJ,
+  k: approachK,
+  l: approachL,
+  m: approachM,
+  n: approachN,
 };
 
 export function listApproaches(): Approach[] {
