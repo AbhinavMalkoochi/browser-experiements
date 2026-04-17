@@ -30,6 +30,8 @@ export async function runOne(opts: RunOptions): Promise<RunResult> {
   const logPrefix = `${opts.approach.name}/${opts.task.id}/s${opts.seed}`;
   const runLog = createRunLog(artifactDir, logPrefix, mirror);
   await fs.writeFile(path.join(artifactDir, 'run.log'), '').catch(() => {});
+  await fs.writeFile(stepsPath, '').catch(() => {});
+  await fs.writeFile(llmPath, '').catch(() => {});
 
   const steps: StepRecord[] = [];
   const llmCalls: LlmUsage[] = [];

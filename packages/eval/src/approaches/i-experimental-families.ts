@@ -7,6 +7,7 @@ import { buildObservationBundle } from '../core/observation.js';
 import { chat, type ChatMessage } from '../core/llm.js';
 import { ENV } from '../env.js';
 import { diffSnapshots, type AxSnapshot } from '../core/ax.js';
+import type { CanonicalObservation } from '../core/canonical.js';
 
 const PLAN_SCHEMA = {
   type: 'object',
@@ -83,14 +84,15 @@ function experimentalSystem(family: string, mode: ObservationMode): string {
 async function proposeFieldActions(
   ctx: ApproachCtx,
   promptBits: string[],
-  observationMessages: ChatMessage[]
+  observationMessages: ChatMessage[],
+  canonical: CanonicalObservation
 ): Promise<{ actions: Action[]; terminal: 'continue' | 'ready_to_submit' | 'blocked' } | null> {
   const out = await chat<{ page_kind: string; actions: Array<{ ref: string; kind: 'fill' | 'select' | 'check' | 'upload' | 'click'; value: string | null; reason: string }>; terminal: 'continue' | 'ready_to_submit' | 'blocked' }>({
     model: ENV.EXECUTOR_MODEL,
     messages: [
       {
         role: 'system',
-        content: 'You map a structured page observation to the smallest complete set of form actions needed next. Use refs from the observation. Skip already filled fields. Emit at most 6 actions. For uploads use value:"resume".',
+        content: 'You map a structured page observation to the smallest complete set of form actions needed next. Use refs from the observation. Skip already filled fields. Prioritize required missing fields first. Emit at most 10 actions. For uploads use value:"resume".',
       },
       { role: 'user', content: promptBits.join('\n') },
       ...observationMessages,
@@ -102,8 +104,29 @@ async function proposeFieldActions(
   ctx.logLlm(out.usage);
   return {
     terminal: out.json.terminal,
-    actions: out.json.actions.map((a) => ({ kind: a.kind, ref: a.ref, value: a.value ?? undefined, reason: a.reason })),
+    actions: out.json.actions.map((a) => normalizeFieldAction(a, canonical)),
   };
+}
+
+function normalizeFieldAction(
+  action: { ref: string; kind: 'fill' | 'select' | 'check' | 'upload' | 'click'; value: string | null; reason: string },
+  canonical: CanonicalObservation
+): Action {
+  const cleanRef = String(action.ref).replace(/^\[|\]$/g, '').trim();
+  const field = canonical.fields.find((f) => f.ref === cleanRef);
+  const actionTarget = canonical.actions.find((a) => a.ref === cleanRef);
+  let kind: Action['kind'] = action.kind;
+  if (field) {
+    if (field.kind === 'text' && action.kind === 'select') kind = 'fill';
+    if (field.kind === 'select' && action.kind === 'fill') kind = 'select';
+    if ((field.kind === 'radio' || field.kind === 'check') && action.kind === 'select') kind = 'check';
+    if (field.kind === 'upload') kind = 'upload';
+  } else if (actionTarget) {
+    kind = actionTarget.kind === 'submit' || actionTarget.kind === 'navigation' || actionTarget.kind === 'button' || actionTarget.kind === 'link'
+      ? 'click'
+      : action.kind;
+  }
+  return { kind, ref: cleanRef, value: action.value ?? undefined, reason: action.reason };
 }
 
 function createExperimentalApproach(
@@ -192,7 +215,8 @@ function createExperimentalApproach(
               '',
               formatActionHistory(history),
             ],
-            obs.promptMessages
+            obs.promptMessages,
+            obs.canonical
           );
           if (fieldPlan) {
             actions = fieldPlan.actions;

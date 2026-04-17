@@ -178,6 +178,21 @@ export class Actuator {
     }
   }
 
+  private fuzzyOptionMatch(node: AxNode | null, requestedValue: string): string | null {
+    if (!node?.options?.length) return null;
+    const want = normalizeChoice(requestedValue);
+    if (!want) return null;
+    const exact = node.options.find((opt) => normalizeChoice(opt) === want);
+    if (exact) return exact;
+    const contains = node.options.find((opt) => {
+      const norm = normalizeChoice(opt);
+      return norm.includes(want) || want.includes(norm);
+    });
+    if (contains) return contains;
+    const semantic = node.options.find((opt) => semanticChoiceMatch(requestedValue, opt));
+    return semantic ?? null;
+  }
+
   async execute(action: Action): Promise<ActResult> {
     try {
       switch (action.kind) {
@@ -247,15 +262,20 @@ export class Actuator {
           }
           if (action.kind === 'select') {
             if (!action.value) return { ok: false, error: 'select requires value' };
+            const matchedValue = this.fuzzyOptionMatch(node, action.value) ?? action.value;
             // Radio group fallback: if the targeted node is a radio, find the sibling
             // radio in the same group whose label matches the requested value and click it.
             if (node?.role === 'radio' || node?.role === 'checkbox') {
-              const want = action.value.trim().toLowerCase();
+              const want = normalizeChoice(matchedValue);
               const group = this.snapshot?.nodes.filter(
                 (n) => (n.role === 'radio' || n.role === 'checkbox') && (n.label === node.label || n.name === node.name || n.section === node.section)
               ) ?? [];
               const match = group.find(
-                (n) => (n.name || '').trim().toLowerCase() === want || (n.value || '').trim().toLowerCase() === want
+                (n) =>
+                  normalizeChoice(n.name || '') === want ||
+                  normalizeChoice(n.value || '') === want ||
+                  semanticChoiceMatch(matchedValue, n.name || '') ||
+                  semanticChoiceMatch(matchedValue, n.value || '')
               );
               if (match) {
                 const mh = await this.resolveHandle(match);
@@ -266,25 +286,30 @@ export class Actuator {
               }
             }
             try {
-              await handle.selectOption({ label: action.value });
+              await handle.selectOption({ label: matchedValue });
               return { ok: true };
             } catch (e) {
               try {
-                await handle.selectOption(action.value);
+                await handle.selectOption(matchedValue);
                 return { ok: true };
               } catch {
                 await this.clickWithEventChain(handle);
                 await sleep(300);
-                const opt = await this.page.getByRole('option', { name: action.value }).first().elementHandle().catch(() => null);
+                const opt = await this.page.getByRole('option', { name: matchedValue }).first().elementHandle().catch(() => null);
                 if (opt) {
                   await this.clickWithEventChain(opt);
                   return { ok: true, note: 'combobox fallback' };
                 }
-                const txt = await this.page.getByText(action.value, { exact: true }).first().elementHandle().catch(() => null);
+                const txt = await this.page.getByText(matchedValue, { exact: false }).first().elementHandle().catch(() => null);
                 if (txt) {
                   await this.clickWithEventChain(txt);
                   return { ok: true, note: 'text-click fallback' };
                 }
+                try {
+                  await this.typeHuman(handle, matchedValue);
+                  await this.page.keyboard.press('Enter').catch(() => {});
+                  return { ok: true, note: 'typeahead fallback' };
+                } catch {/* ignore */}
                 return { ok: false, error: `select option not found: ${action.value}` };
               }
             }
@@ -352,3 +377,16 @@ export class Actuator {
 
 function sleep(ms: number): Promise<void> { return new Promise((r) => setTimeout(r, ms)); }
 function jitter(amp: number): number { return (Math.random() - 0.5) * 2 * amp; }
+function normalizeChoice(s: string): string {
+  return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+function semanticChoiceMatch(requested: string, candidate: string): boolean {
+  const want = normalizeChoice(requested);
+  const have = normalizeChoice(candidate);
+  if (!want || !have) return false;
+  if (want === have || have.includes(want) || want.includes(have)) return true;
+  if ((want === 'yes' || want === 'true') && /yes|authorized|eligible|able|i am|will not require/i.test(candidate)) return true;
+  if ((want === 'no' || want === 'false') && /no|not authorized|not eligible|require sponsorship|will require/i.test(candidate)) return true;
+  if (want.includes('decline') && /decline|not wish|prefer not/i.test(candidate)) return true;
+  return false;
+}
