@@ -185,7 +185,13 @@ export async function executeActions(
       if (history) history.push({ step: stepIndex, action: resolved, ok: false, error: lastError });
       continue;
     }
-    if (resolved.kind === 'upload' && (!resolved.value || resolved.value === 'resume' || resolved.value === 'RESUME' || resolved.value === '<resume>')) {
+    if (
+      resolved.kind === 'upload' &&
+      (
+        !resolved.value ||
+        /^(resume|<resume>)$/i.test(String(resolved.value).trim())
+      )
+    ) {
       resolved.value = ctx.profile.resumePath;
     }
     ctx.runLog?.info('execute', { kind: resolved.kind, ref: resolved.ref ?? null, index: resolved.index ?? null });

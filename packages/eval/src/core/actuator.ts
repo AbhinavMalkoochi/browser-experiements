@@ -319,9 +319,16 @@ export class Actuator {
             } catch (e) {
               // Some custom upload widgets open an OS dialog on click; use filechooser event.
               try {
-                const chooserPromise = this.page.waitForEvent('filechooser', { timeout: 4000 });
-                await this.clickWithEventChain(handle);
-                const chooser = await chooserPromise;
+                const chooserPromise = this.page
+                  .waitForEvent('filechooser', { timeout: 4000 })
+                  .then((chooser) => ({ ok: true as const, chooser }))
+                  .catch((err: unknown) => ({ ok: false as const, err }));
+                await this.clickWithEventChain(handle).catch(() => {});
+                const chooserResult = await chooserPromise;
+                if (!chooserResult.ok) {
+                  return { ok: false, error: `upload failed: ${(e as Error).message} / chooser: ${(chooserResult.err as Error).message}` };
+                }
+                const chooser = chooserResult.chooser;
                 await chooser.setFiles(action.value);
                 return { ok: true, note: 'filechooser fallback' };
               } catch (e2) {
