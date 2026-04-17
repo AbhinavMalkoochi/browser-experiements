@@ -128,11 +128,11 @@ export async function executeActions(
   stepIndex: number,
   history?: ActionHistoryEntry[]
 ): Promise<{ executed: number; terminal: 'done' | 'abort' | null; lastError: string | null; doneRejected?: boolean }> {
-  const actuator = new Actuator(ctx.page, snap);
   let executed = 0;
   let terminal: 'done' | 'abort' | null = null;
   let lastError: string | null = null;
   let doneRejected = false;
+  let currentSnap = snap;
   for (const a of actions) {
     if (a.kind === 'done') {
       const fresh = await extractAxSnapshot(ctx.page).catch(() => snap);
@@ -159,6 +159,12 @@ export async function executeActions(
       lastError = 'cancelled';
       break;
     }
+    // Refresh the snapshot before each stateful action so refs follow reactive
+    // rerenders instead of targeting stale DOM nodes from the start of the step.
+    if (['click', 'fill', 'select', 'check', 'upload'].includes(a.kind)) {
+      currentSnap = await extractAxSnapshot(ctx.page).catch(() => currentSnap);
+    }
+    const actuator = new Actuator(ctx.page, currentSnap);
     // Inject resume path
     const resolved: Action = { ...a };
     // LLMs sometimes emit semantic refs ("email", "gender"); actuator only resolves numeric AX refs.

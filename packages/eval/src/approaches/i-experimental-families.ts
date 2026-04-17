@@ -112,7 +112,8 @@ function normalizeFieldAction(
   action: { ref: string; kind: 'fill' | 'select' | 'check' | 'upload' | 'click'; value: string | null; reason: string },
   canonical: CanonicalObservation
 ): Action {
-  const cleanRef = String(action.ref).replace(/^\[|\]$/g, '').trim();
+  const rawRef = String(action.ref).replace(/^\[|\]$/g, '').trim();
+  const cleanRef = /^\d+$/.test(rawRef) ? rawRef : resolveSemanticRef(rawRef, canonical) ?? rawRef;
   const field = canonical.fields.find((f) => f.ref === cleanRef);
   const actionTarget = canonical.actions.find((a) => a.ref === cleanRef);
   let kind: Action['kind'] = action.kind;
@@ -127,6 +128,41 @@ function normalizeFieldAction(
       : action.kind;
   }
   return { kind, ref: cleanRef, value: action.value ?? undefined, reason: action.reason };
+}
+
+function resolveSemanticRef(ref: string, canonical: CanonicalObservation): string | null {
+  const norm = normalizeSemantic(ref);
+  if (!norm) return null;
+  const exactField = canonical.fields.find((f) => normalizeSemantic(f.label) === norm);
+  if (exactField) return exactField.ref;
+  const exactAction = canonical.actions.find((a) => normalizeSemantic(a.label) === norm);
+  if (exactAction) return exactAction.ref;
+
+  const aliasMap: Array<[string, string[]]> = [
+    ['name', ['first name', 'full name', 'name']],
+    ['email', ['email', 'email address']],
+    ['phone', ['phone', 'phone number', 'mobile']],
+    ['location', ['location', 'current location', 'city', 'location city']],
+    ['upload resume', ['resume', 'upload resume', 'cv', 'attach resume']],
+    ['submit', ['submit', 'apply', 'send application', 'finish']],
+  ];
+  for (const [key, aliases] of aliasMap) {
+    if (norm === normalizeSemantic(key) || aliases.some((a) => normalizeSemantic(a) === norm)) {
+      const target = canonical.fields.find((f) => aliases.some((a) => normalizeSemantic(f.label).includes(normalizeSemantic(a)))) ??
+        canonical.actions.find((a) => aliases.some((x) => normalizeSemantic(a.label).includes(normalizeSemantic(x))));
+      if (target) return target.ref;
+    }
+  }
+
+  const fuzzyField = canonical.fields.find((f) => normalizeSemantic(f.label).includes(norm) || norm.includes(normalizeSemantic(f.label)));
+  if (fuzzyField) return fuzzyField.ref;
+  const fuzzyAction = canonical.actions.find((a) => normalizeSemantic(a.label).includes(norm) || norm.includes(normalizeSemantic(a.label)));
+  if (fuzzyAction) return fuzzyAction.ref;
+  return null;
+}
+
+function normalizeSemantic(text: string): string {
+  return (text || '').toLowerCase().replace(/[_\-]+/g, ' ').replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 function createExperimentalApproach(
@@ -271,7 +307,7 @@ function createExperimentalApproach(
 
         const result = await executeActions(ctx, snap, actions, steps, history);
         executed += result.executed;
-        if (result.terminal === 'done' || declaredTerminal === 'ready_to_submit') {
+        if (result.terminal === 'done') {
           readyToSubmit = true;
           if (experiment.recoveryMode === 'replay_diff') {
             await writeReplay(ctx.cacheDir, replayKey, { steps: recorded }).catch(() => {});
