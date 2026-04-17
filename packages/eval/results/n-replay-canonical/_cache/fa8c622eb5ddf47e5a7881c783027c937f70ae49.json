@@ -1,0 +1,74 @@
+{
+  "steps": [
+    {
+      "structuralHash": "cbbfa40c",
+      "actions": [
+        {
+          "kind": "click",
+          "ref": "6",
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Initiating the application process by clicking the Apply button.",
+          "status": null,
+          "sig": "e0c86f32"
+        }
+      ]
+    },
+    {
+      "structuralHash": "dbac7465",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "8",
+          "value": "Priya Narayan",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Name field.",
+          "status": null,
+          "sig": "22c4ce60"
+        },
+        {
+          "kind": "fill",
+          "ref": "9",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Email field.",
+          "status": null,
+          "sig": "eaca0639"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "415-555-0168",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Phone Number field.",
+          "status": null,
+          "sig": "5cef15cc"
+        },
+        {
+          "kind": "upload",
+          "ref": "11",
+          "value": null,
+          "enter": null,
+          "seconds": 0,
+          "reason": "Uploading the resume.",
+          "status": null,
+          "sig": "ee80146f"
+        },
+        {
+          "kind": "fill",
+          "ref": "15",
+          "value": "One of my favorite projects was developing a real-time collaborative tool using React and WebSocket. It was exceptional because it enhanced team productivity and communication, allowing multiple users to edit documents simultaneously, which was a game-changer for remote work.",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the project explanation field.",
+          "status": null,
+          "sig": "682becdb"
+        }
+      ]
+    }
+  ]
+}

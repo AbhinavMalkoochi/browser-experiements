@@ -1,0 +1,40 @@
+{
+  "approach": "j-canonical-dsl",
+  "description": "Phase 1 family A: canonical observation + typed DSL executor.",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776389466469,
+  "finishedAt": 1776389608997,
+  "durationMs": 142528,
+  "stepsTaken": 6,
+  "actionsExecuted": 11,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 11874,
+  "totalOutputTokens": 848,
+  "totalCostUsd": 0.0022898999999999997,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/greenhouse-ispottv/seed-0",
+  "experiment": {
+    "family": "family_a_canonical",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "local_verify"
+  }
+}

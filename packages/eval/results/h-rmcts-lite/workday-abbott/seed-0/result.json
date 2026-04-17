@@ -1,0 +1,33 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "workday-abbott",
+  "seed": 0,
+  "startedAt": 1776380630045,
+  "finishedAt": 1776380842928,
+  "durationMs": 212883,
+  "stepsTaken": 23,
+  "actionsExecuted": 29,
+  "totalLlmCalls": 39,
+  "totalInputTokens": 141611,
+  "totalOutputTokens": 5009,
+  "totalCostUsd": 0.024247050000000006,
+  "finalUrl": "https://abbott.wd5.myworkdayjobs.com/en-US/abbottcareers/job/United-States---Minnesota---St-Paul/Software-Verification-Engineer-I_31147199-1?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/workday-abbott/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/workday-abbott/seed-0"
+}

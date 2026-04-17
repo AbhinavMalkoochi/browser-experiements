@@ -1,0 +1,37 @@
+{
+  "approach": "c-pure-vision-som",
+  "description": "Pure vision + Set-of-Marks: numbered-box screenshot, no DOM text fed to LLM.",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776388769616,
+  "finishedAt": 1776388795310,
+  "durationMs": 25694,
+  "stepsTaken": 5,
+  "actionsExecuted": 8,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 11055,
+  "totalOutputTokens": 686,
+  "totalCostUsd": 0.0344975,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "Share something you’ve built that you’re proud of. Include links (GitHub, apps, demos, papers, etc), and clearly describe your specific contributions.",
+      "Which of the following areas are you most excited to contribute to here: iOS, Web-Product, Backend/Platform, Applied AI?"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.67 filled=4/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/ashby-mirage/seed-0"
+}

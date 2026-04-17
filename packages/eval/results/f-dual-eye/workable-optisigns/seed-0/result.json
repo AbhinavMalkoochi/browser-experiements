@@ -1,0 +1,41 @@
+{
+  "approach": "f-dual-eye",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776378870366,
+  "finishedAt": 1776379174686,
+  "durationMs": 304320,
+  "stepsTaken": 40,
+  "actionsExecuted": 31,
+  "totalLlmCalls": 100,
+  "totalInputTokens": 199426,
+  "totalOutputTokens": 16751,
+  "totalCostUsd": 0.2507407,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/apply/",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 7,
+    "missing": [
+      "* First name",
+      "* Last name",
+      "* Email",
+      "* Phone +1",
+      "file upload",
+      "* What app project you worked on recently with your Full Stack experience? Please describe what the app is about, what's the tech stack and your role in building it?",
+      "* Do you have an app portfolio, website, git hub? Please share."
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/7 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/workable-optisigns/seed-0"
+}

@@ -1,18 +1,19 @@
 {
   "approach": "d-hierarchical",
+  "description": "Hierarchical planner (big model) + tiny executor + change-observer verifier.",
   "taskId": "lever-whoop",
   "seed": 0,
-  "startedAt": 1776370220441,
-  "finishedAt": 1776370380056,
-  "durationMs": 159615,
-  "stepsTaken": 7,
-  "actionsExecuted": 10,
-  "totalLlmCalls": 7,
-  "totalInputTokens": 16000,
-  "totalOutputTokens": 1443,
-  "totalCostUsd": 0.009899850000000002,
+  "startedAt": 1776389529667,
+  "finishedAt": 1776389697377,
+  "durationMs": 167710,
+  "stepsTaken": 5,
+  "actionsExecuted": 12,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 13355,
+  "totalOutputTokens": 1385,
+  "totalCostUsd": 0.009252100000000001,
   "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
-  "finalStatus": "aborted",
+  "finalStatus": "budget_exceeded",
   "success": false,
   "readyToSubmit": false,
   "verifier": {
@@ -31,7 +32,7 @@
     "classification": "partial_filled",
     "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/lever-whoop/seed-0/final.png"
   },
-  "failureMode": "partial_filled",
+  "failureMode": "budget_exceeded",
   "error": null,
   "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/lever-whoop/seed-0"
 }

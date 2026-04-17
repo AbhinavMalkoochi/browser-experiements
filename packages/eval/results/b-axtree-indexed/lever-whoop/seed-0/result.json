@@ -1,18 +1,19 @@
 {
   "approach": "b-axtree-indexed",
+  "description": "AX-tree indexed refs + structured-output DSL actions (GPT-4o-mini executor).",
   "taskId": "lever-whoop",
   "seed": 0,
-  "startedAt": 1776370166072,
-  "finishedAt": 1776370539563,
-  "durationMs": 373491,
-  "stepsTaken": 0,
-  "actionsExecuted": 0,
-  "totalLlmCalls": 7,
-  "totalInputTokens": 15543,
-  "totalOutputTokens": 965,
-  "totalCostUsd": 0.0029104499999999998,
+  "startedAt": 1776388601366,
+  "finishedAt": 1776388652506,
+  "durationMs": 51140,
+  "stepsTaken": 5,
+  "actionsExecuted": 15,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 11493,
+  "totalOutputTokens": 869,
+  "totalCostUsd": 0.00224535,
   "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
-  "finalStatus": "timeout",
+  "finalStatus": "budget_exceeded",
   "success": false,
   "readyToSubmit": false,
   "verifier": {
@@ -21,9 +22,9 @@
     "requiredFieldsFilled": 7,
     "requiredFieldsTotal": 10,
     "missing": [
-      "No",
-      "No",
-      "No"
+      "Yes",
+      "Yes",
+      "Yes"
     ],
     "submitButtonFound": true,
     "submitButtonEnabled": true,
@@ -31,7 +32,7 @@
     "classification": "partial_filled",
     "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/lever-whoop/seed-0/final.png"
   },
-  "failureMode": "timeout",
+  "failureMode": "budget_exceeded",
   "error": null,
   "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/b-axtree-indexed/lever-whoop/seed-0"
 }

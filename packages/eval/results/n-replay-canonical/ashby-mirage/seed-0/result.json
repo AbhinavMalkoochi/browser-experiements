@@ -1,0 +1,42 @@
+{
+  "approach": "n-replay-canonical",
+  "description": "Phase 1 family D: canonical observation + replay/diff reuse.",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776389732709,
+  "finishedAt": 1776389815579,
+  "durationMs": 82870,
+  "stepsTaken": 6,
+  "actionsExecuted": 5,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 10681,
+  "totalOutputTokens": 1460,
+  "totalCostUsd": 0.0024781499999999997,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "Resume"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.83 filled=5/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/n-replay-canonical/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/n-replay-canonical/ashby-mirage/seed-0",
+  "experiment": {
+    "family": "family_d_replay",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "replay_diff"
+  }
+}

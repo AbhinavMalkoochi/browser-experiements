@@ -1,0 +1,37 @@
+{
+  "approach": "c-pure-vision-som",
+  "description": "Pure vision + Set-of-Marks: numbered-box screenshot, no DOM text fed to LLM.",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776389151356,
+  "finishedAt": 1776389178628,
+  "durationMs": 27272,
+  "stepsTaken": 5,
+  "actionsExecuted": 7,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 10915,
+  "totalOutputTokens": 609,
+  "totalCostUsd": 0.0333775,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/apply/",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "* What app project you worked on recently with your Full Stack experience? Please describe what the app is about, what's the tech stack and your role in building it?",
+      "* Do you have an app portfolio, website, git hub? Please share."
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.67 filled=4/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/workable-optisigns/seed-0"
+}

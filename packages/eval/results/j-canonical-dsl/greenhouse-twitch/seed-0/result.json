@@ -1,0 +1,47 @@
+{
+  "approach": "j-canonical-dsl",
+  "description": "Phase 1 family A: canonical observation + typed DSL executor.",
+  "taskId": "greenhouse-twitch",
+  "seed": 0,
+  "startedAt": 1776389553440,
+  "finishedAt": 1776389857958,
+  "durationMs": 304518,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 9721,
+  "totalOutputTokens": 983,
+  "totalCostUsd": 0.00204795,
+  "finalUrl": "https://job-boards.greenhouse.io/twitch/jobs/8447271002?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 10,
+    "missing": [
+      "Location (City)*",
+      "Have you held H-1B status, or had an H-1B petition approved on your behalf, within the preceding 6 years for an employer other than a cap exempt institution? *",
+      "In which country/region do you have citizenship?*",
+      "Since obtaining your most recent citizenship, did you afterwards become a permanent resident in any other country/region? This does not include temporary statuses such as student visas or time-limited work permits.*",
+      "For the sole purpose of determining export licensing requirements, please provide your country of citizenship or legal permanent residence, whichever was obtained last. *",
+      "Would you like to be considered for future opportunities at Twitch when you apply?*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.40 filled=4/10 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/greenhouse-twitch/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/greenhouse-twitch/seed-0",
+  "experiment": {
+    "family": "family_a_canonical",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "local_verify"
+  }
+}

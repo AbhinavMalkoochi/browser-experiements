@@ -1,0 +1,136 @@
+{
+  "steps": [
+    {
+      "structuralHash": "ac963e6f",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "[8]",
+          "value": "Priya Narayan",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Preferred Name.",
+          "status": null
+        },
+        {
+          "kind": "fill",
+          "ref": "[10]",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Email address.",
+          "status": null
+        },
+        {
+          "kind": "fill",
+          "ref": "[11]",
+          "value": "415-555-0168",
+          "enter": true,
+          "seconds": 0,
+          "reason": "Filling in the Phone number.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "ac963e6f",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "8",
+          "value": "Priya Narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the Preferred Name field with the applicant's name.",
+          "status": null,
+          "sig": "9e70580e"
+        },
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the Email field with the applicant's email address.",
+          "status": null,
+          "sig": "eaca0639"
+        },
+        {
+          "kind": "fill",
+          "ref": "11",
+          "value": "415-555-0168",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the Phone field with the applicant's phone number.",
+          "status": null,
+          "sig": "44b56496"
+        }
+      ]
+    },
+    {
+      "structuralHash": "ac963e6f",
+      "actions": [
+        {
+          "kind": "upload",
+          "ref": "12",
+          "value": "path/to/resume.pdf",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume to complete the application form.",
+          "status": null,
+          "sig": "a7d1ef"
+        },
+        {
+          "kind": "fill",
+          "ref": "19",
+          "value": "I built a web application for managing personal finances using React and Node.js. I contributed to the frontend development and integrated APIs for real-time data. You can check it out on my GitHub: https://github.com/priya-narayan/personal-finance-app",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the project description to showcase my work.",
+          "status": null,
+          "sig": "8ae86d2d"
+        },
+        {
+          "kind": "fill",
+          "ref": "20",
+          "value": "Web-Product",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting the area of contribution I am most excited about.",
+          "status": null,
+          "sig": "f546ee32"
+        }
+      ]
+    },
+    {
+      "structuralHash": "ac963e6f",
+      "actions": [
+        {
+          "kind": "upload",
+          "ref": "12",
+          "value": "path/to/resume.pdf",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the required resume file to complete the application form.",
+          "status": null,
+          "sig": "a7d1ef"
+        }
+      ]
+    },
+    {
+      "structuralHash": "ac963e6f",
+      "actions": [
+        {
+          "kind": "upload",
+          "ref": "12",
+          "value": "path/to/resume.pdf",
+          "enter": null,
+          "seconds": null,
+          "reason": "Uploading the resume to complete the application form.",
+          "status": null,
+          "sig": "a7d1ef"
+        }
+      ]
+    }
+  ]
+}

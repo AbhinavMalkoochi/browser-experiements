@@ -1,0 +1,346 @@
+{
+  "urlPattern": "job-boards.greenhouse.io/twitch/jobs/*",
+  "createdAt": 1776389288596,
+  "steps": [
+    {
+      "structuralHash": "d7a3e5ef",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "10",
+          "value": "Priya",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling First Name",
+          "status": null,
+          "sig": "2e49be5e"
+        },
+        {
+          "kind": "fill",
+          "ref": "11",
+          "value": "Narayan",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Last Name",
+          "status": null,
+          "sig": "f32910e8"
+        },
+        {
+          "kind": "fill",
+          "ref": "12",
+          "value": "priya.narayan.apply@gmail.com",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Email",
+          "status": null,
+          "sig": "b3656962"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Country",
+          "status": null,
+          "sig": "67ae1187"
+        },
+        {
+          "kind": "fill",
+          "ref": "15",
+          "value": "415-555-0168",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Phone",
+          "status": null,
+          "sig": "fc32a89e"
+        },
+        {
+          "kind": "fill",
+          "ref": "16",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Location (City)",
+          "status": null,
+          "sig": "10f795a5"
+        },
+        {
+          "kind": "select",
+          "ref": "43",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Are you familiar with Twitch?",
+          "status": null,
+          "sig": "9ac7020f"
+        },
+        {
+          "kind": "select",
+          "ref": "45",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling Are you currently a Twitch employee?",
+          "status": null,
+          "sig": "42c4b05f"
+        }
+      ]
+    },
+    {
+      "structuralHash": "4aaa9c25",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "47",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Are you open to relocation?' with 'Yes'",
+          "status": null,
+          "sig": "4b2002e3"
+        },
+        {
+          "kind": "select",
+          "ref": "49",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Are you a current employee with Amazon or any Amazon subsidiary?' with 'No'",
+          "status": null,
+          "sig": "e09ddbaf"
+        },
+        {
+          "kind": "select",
+          "ref": "51",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Have you previously applied to Amazon or any Amazon subsidiary?' with 'No'",
+          "status": null,
+          "sig": "e208a1df"
+        },
+        {
+          "kind": "select",
+          "ref": "53",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Have you previously been employed by Amazon or any Amazon subsidiary?' with 'No'",
+          "status": null,
+          "sig": "52e3dfa7"
+        },
+        {
+          "kind": "select",
+          "ref": "55",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Are you subject to a non-competition agreement?' with 'No'",
+          "status": null,
+          "sig": "57f522d"
+        },
+        {
+          "kind": "select",
+          "ref": "57",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'If offered employment by Amazon, would you be legally eligible to begin employment immediately?' with 'Yes'",
+          "status": null,
+          "sig": "bcff6b4f"
+        },
+        {
+          "kind": "fill",
+          "ref": "16",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Location (City)*' with 'San Jose'",
+          "status": null,
+          "sig": "10f795a5"
+        },
+        {
+          "kind": "fill",
+          "ref": "13",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in 'Country*' with 'United States'",
+          "status": null,
+          "sig": "67ae1187"
+        }
+      ]
+    },
+    {
+      "structuralHash": "71aa6266",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "47",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'Are you currently a Twitch employee?' with 'No'",
+          "status": null,
+          "sig": "42c4b05f"
+        },
+        {
+          "kind": "select",
+          "ref": "52",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'Are you a current employee with Amazon or any Amazon subsidiary (outside of Twitch)?' with 'No'",
+          "status": null,
+          "sig": "e09ddbaf"
+        },
+        {
+          "kind": "select",
+          "ref": "62",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'Do you need, or will you need in the future, any immigration related support or sponsorship from Amazon?' with 'Yes'",
+          "status": null,
+          "sig": "cb018cc7"
+        },
+        {
+          "kind": "select",
+          "ref": "64",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'Have you held H-1B status, or had an H-1B petition approved on your behalf, within the preceding 6 years for an employer other than a cap exempt institution?' with 'No'",
+          "status": null,
+          "sig": "cba2602f"
+        },
+        {
+          "kind": "select",
+          "ref": "66",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'In which country/region do you have citizenship?' with 'United States'",
+          "status": null,
+          "sig": "131d8d4f"
+        },
+        {
+          "kind": "select",
+          "ref": "68",
+          "value": "No",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'Since obtaining your most recent citizenship, did you afterwards become a permanent resident in any other country/region?' with 'No'",
+          "status": null,
+          "sig": "a624f14b"
+        },
+        {
+          "kind": "select",
+          "ref": "70",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling 'For the sole purpose of determining export licensing requirements, please provide your country of citizenship or legal permanent residence, whichever was obtained last.' with 'United States'",
+          "status": null,
+          "sig": "91c19ec5"
+        }
+      ]
+    },
+    {
+      "structuralHash": "908d7cbe",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "13",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in Country field",
+          "status": null,
+          "sig": "67ae1187"
+        },
+        {
+          "kind": "fill",
+          "ref": "16",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in Location (City) field",
+          "status": null,
+          "sig": "10f795a5"
+        },
+        {
+          "kind": "select",
+          "ref": "65",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in Citizenship field",
+          "status": null,
+          "sig": "131d8d4f"
+        },
+        {
+          "kind": "select",
+          "ref": "73",
+          "value": "Yes",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in Future Opportunities field",
+          "status": null,
+          "sig": "58a6ca27"
+        }
+      ]
+    },
+    {
+      "structuralHash": "ce961fb",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "15",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the city field with the correct value.",
+          "status": null,
+          "sig": "10f795a5"
+        },
+        {
+          "kind": "select",
+          "ref": "64",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Selecting the country of citizenship from the dropdown.",
+          "status": null,
+          "sig": "131d8d4f"
+        }
+      ]
+    },
+    {
+      "structuralHash": "6838bb82",
+      "actions": [
+        {
+          "kind": "select",
+          "ref": "64",
+          "value": "United States",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the country of citizenship",
+          "status": null,
+          "sig": "131d8d4f"
+        },
+        {
+          "kind": "fill",
+          "ref": "15",
+          "value": "San Jose",
+          "enter": null,
+          "seconds": null,
+          "reason": "Filling in the city",
+          "status": null,
+          "sig": "10f795a5"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "approach": "f-dual-eye",
+  "taskId": "applytojob-genalyte",
+  "seed": 0,
+  "startedAt": 1776378952514,
+  "finishedAt": 1776379189199,
+  "durationMs": 236685,
+  "stepsTaken": 40,
+  "actionsExecuted": 40,
+  "totalLlmCalls": 110,
+  "totalInputTokens": 255053,
+  "totalOutputTokens": 8284,
+  "totalCostUsd": 0.25183315,
+  "finalUrl": "https://genalyte.applytojob.com/apply/ms4az9EW8x/Software-Engineer-I?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": false,
+    "submitButtonEnabled": false,
+    "evidence": "ratio=0.00 filled=0/0 submit=false/false submittedLike=false",
+    "classification": "form_not_loaded",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/applytojob-genalyte/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/applytojob-genalyte/seed-0"
+}

@@ -1,0 +1,37 @@
+{
+  "approach": "d-hierarchical",
+  "description": "Hierarchical planner (big model) + tiny executor + change-observer verifier.",
+  "taskId": "greenhouse-twitch",
+  "seed": 0,
+  "startedAt": 1776389253829,
+  "finishedAt": 1776389528951,
+  "durationMs": 275122,
+  "stepsTaken": 5,
+  "actionsExecuted": 32,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 15202,
+  "totalOutputTokens": 1580,
+  "totalCostUsd": 0.010078550000000002,
+  "finalUrl": "https://job-boards.greenhouse.io/twitch/jobs/8447271002?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "In which country/region do you have citizenship?*",
+      "For the sole purpose of determining export licensing requirements, please provide your country of citizenship or legal permanent residence, whichever was obtained last. *"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.67 filled=4/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/greenhouse-twitch/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/greenhouse-twitch/seed-0"
+}

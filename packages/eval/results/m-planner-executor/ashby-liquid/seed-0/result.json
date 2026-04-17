@@ -1,0 +1,42 @@
+{
+  "approach": "m-planner-executor",
+  "description": "Phase 1 family E: planner/executor split over canonical observation.",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776388250363,
+  "finishedAt": 1776388277993,
+  "durationMs": 27630,
+  "stepsTaken": 3,
+  "actionsExecuted": 7,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 6675,
+  "totalOutputTokens": 676,
+  "totalCostUsd": 0.0065228,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 5,
+    "missing": [
+      "Explain one of your favorite projects, and why it was exceptional to you."
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.80 filled=4/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/m-planner-executor/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/m-planner-executor/ashby-liquid/seed-0",
+  "experiment": {
+    "family": "family_e_planner_executor",
+    "observationMode": "canonical",
+    "plannerMode": "planner_executor",
+    "recoveryMode": "local_verify"
+  }
+}

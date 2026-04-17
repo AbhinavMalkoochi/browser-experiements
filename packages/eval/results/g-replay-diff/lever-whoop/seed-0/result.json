@@ -1,18 +1,19 @@
 {
   "approach": "g-replay-diff",
+  "description": "Novel: Reflective replay with per-step AX-signature diff-adapt; LLM only on mismatch.",
   "taskId": "lever-whoop",
   "seed": 0,
-  "startedAt": 1776370539937,
-  "finishedAt": 1776370851032,
-  "durationMs": 311095,
-  "stepsTaken": 0,
-  "actionsExecuted": 0,
-  "totalLlmCalls": 8,
-  "totalInputTokens": 15777,
-  "totalOutputTokens": 3976,
-  "totalCostUsd": 0.00475215,
+  "startedAt": 1776389290434,
+  "finishedAt": 1776389425407,
+  "durationMs": 134973,
+  "stepsTaken": 6,
+  "actionsExecuted": 14,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 8624,
+  "totalOutputTokens": 659,
+  "totalCostUsd": 0.001689,
   "finalUrl": "https://jobs.lever.co/whoop/b7f75849-b5c0-49fe-8d24-50cbb39d284d/apply?utm_source=Simplify&ref=Simplify",
-  "finalStatus": "timeout",
+  "finalStatus": "budget_exceeded",
   "success": false,
   "readyToSubmit": false,
   "verifier": {
@@ -31,7 +32,7 @@
     "classification": "partial_filled",
     "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0/final.png"
   },
-  "failureMode": "timeout",
+  "failureMode": "budget_exceeded",
   "error": null,
   "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/lever-whoop/seed-0"
 }

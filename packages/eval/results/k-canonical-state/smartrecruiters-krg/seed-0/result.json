@@ -1,0 +1,40 @@
+{
+  "approach": "k-canonical-state",
+  "description": "Phase 1 family B: canonical observation + field-state action compiler.",
+  "taskId": "smartrecruiters-krg",
+  "seed": 0,
+  "startedAt": 1776392406378,
+  "finishedAt": 1776392433274,
+  "durationMs": 26896,
+  "stepsTaken": 6,
+  "actionsExecuted": 5,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 7535,
+  "totalOutputTokens": 684,
+  "totalCostUsd": 0.0015406500000000002,
+  "finalUrl": "https://jobs.smartrecruiters.com/oneclick-ui/company/KrgTechnologyInc/publication/d6125dc9-e6cd-4650-89db-3469b9a1fc48?dcr_ci=KrgTechnologyInc",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/k-canonical-state/smartrecruiters-krg/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/k-canonical-state/smartrecruiters-krg/seed-0",
+  "experiment": {
+    "family": "family_b_field_state",
+    "observationMode": "canonical",
+    "plannerMode": "field_state",
+    "recoveryMode": "local_verify"
+  }
+}

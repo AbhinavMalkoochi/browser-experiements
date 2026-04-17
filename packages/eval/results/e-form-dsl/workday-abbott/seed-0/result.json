@@ -1,0 +1,33 @@
+{
+  "approach": "e-form-dsl",
+  "taskId": "workday-abbott",
+  "seed": 0,
+  "startedAt": 1776378017990,
+  "finishedAt": 1776378443850,
+  "durationMs": 425860,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 14,
+  "totalInputTokens": 30615,
+  "totalOutputTokens": 1263,
+  "totalCostUsd": 0.0053500499999999986,
+  "finalUrl": "https://abbott.wd5.myworkdayjobs.com/en-US/abbottcareers/job/United-States---Minnesota---St-Paul/Human-Factors-Engineer_31137297-1?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/workday-abbott/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/workday-abbott/seed-0"
+}

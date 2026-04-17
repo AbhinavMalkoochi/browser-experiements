@@ -1,0 +1,40 @@
+{
+  "approach": "g-replay-diff",
+  "description": "Novel: Reflective replay with per-step AX-signature diff-adapt; LLM only on mismatch.",
+  "taskId": "greenhouse-twitch",
+  "seed": 0,
+  "startedAt": 1776389146603,
+  "finishedAt": 1776389451668,
+  "durationMs": 305065,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 11565,
+  "totalOutputTokens": 1368,
+  "totalCostUsd": 0.0025555499999999997,
+  "finalUrl": "https://job-boards.greenhouse.io/twitch/jobs/8447271002?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "timeout",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 9,
+    "missing": [
+      "Location (City)*",
+      "Are you familiar with Twitch? *",
+      "Are you open to relocation? *",
+      "In which country/region do you have citizenship?*",
+      "Since obtaining your most recent citizenship, did you afterwards become a permanent resident in any other country/region? This does not include temporary statuses such as student visas or time-limited work permits.*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.44 filled=4/9 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/greenhouse-twitch/seed-0/final.png"
+  },
+  "failureMode": "timeout",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/g-replay-diff/greenhouse-twitch/seed-0"
+}

@@ -1,0 +1,33 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "smartrecruiters-krg",
+  "seed": 0,
+  "startedAt": 1776380585691,
+  "finishedAt": 1776380629473,
+  "durationMs": 43782,
+  "stepsTaken": 5,
+  "actionsExecuted": 2,
+  "totalLlmCalls": 4,
+  "totalInputTokens": 4228,
+  "totalOutputTokens": 1899,
+  "totalCostUsd": 0.0017736,
+  "finalUrl": "https://jobs.smartrecruiters.com/oneclick-ui/company/KrgTechnologyInc/publication/d6125dc9-e6cd-4650-89db-3469b9a1fc48?dcr_ci=KrgTechnologyInc",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/smartrecruiters-krg/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/smartrecruiters-krg/seed-0"
+}

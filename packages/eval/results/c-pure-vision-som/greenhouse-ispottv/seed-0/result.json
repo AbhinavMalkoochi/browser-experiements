@@ -1,0 +1,39 @@
+{
+  "approach": "c-pure-vision-som",
+  "description": "Pure vision + Set-of-Marks: numbered-box screenshot, no DOM text fed to LLM.",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776388795960,
+  "finishedAt": 1776388873382,
+  "durationMs": 77422,
+  "stepsTaken": 5,
+  "actionsExecuted": 15,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 10882,
+  "totalOutputTokens": 827,
+  "totalCostUsd": 0.035475,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 9,
+    "missing": [
+      "Where are you currently located?*",
+      "Are you currently eligible to work in the United States of America?*",
+      "Do you now or in the future require visa sponsorship to continue working in the United States?*",
+      "iSpot cannot support visa sponsorships or transfers for this role. Please confirm you do not need visa sponsorship.*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.56 filled=5/9 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/greenhouse-ispottv/seed-0"
+}

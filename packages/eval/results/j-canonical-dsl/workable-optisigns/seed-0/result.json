@@ -1,0 +1,42 @@
+{
+  "approach": "j-canonical-dsl",
+  "description": "Phase 1 family A: canonical observation + typed DSL executor.",
+  "taskId": "workable-optisigns",
+  "seed": 0,
+  "startedAt": 1776389914171,
+  "finishedAt": 1776389970816,
+  "durationMs": 56645,
+  "stepsTaken": 2,
+  "actionsExecuted": 7,
+  "totalLlmCalls": 2,
+  "totalInputTokens": 2970,
+  "totalOutputTokens": 410,
+  "totalCostUsd": 0.0006915,
+  "finalUrl": "https://apply.workable.com/optisigns-inc/j/EB560EFFD4/apply/",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 7,
+    "missing": [
+      "file upload"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.86 filled=6/7 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/workable-optisigns/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/workable-optisigns/seed-0",
+  "experiment": {
+    "family": "family_a_canonical",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "local_verify"
+  }
+}

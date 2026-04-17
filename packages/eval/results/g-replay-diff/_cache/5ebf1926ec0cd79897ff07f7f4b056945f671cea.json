@@ -1,0 +1,93 @@
+{
+  "urlPattern": "jobs.smartrecruiters.com/KrgTechnologyInc/*",
+  "createdAt": 1776389371381,
+  "steps": [
+    {
+      "structuralHash": "e8a7fba0",
+      "actions": [
+        {
+          "kind": "click",
+          "ref": "1",
+          "value": "I'm interested",
+          "enter": null,
+          "seconds": null,
+          "reason": "Opening the application form for the job.",
+          "status": null,
+          "sig": "778b0662"
+        }
+      ]
+    },
+    {
+      "structuralHash": "7f2a6326",
+      "actions": [
+        {
+          "kind": "scroll",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Scrolling down to find the application form.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "7f2a6326",
+      "actions": [
+        {
+          "kind": "scroll",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Scrolling down to find the form fields.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "7f2a6326",
+      "actions": [
+        {
+          "kind": "scroll",
+          "ref": null,
+          "value": null,
+          "enter": null,
+          "seconds": 2,
+          "reason": "Scrolling to find the application form.",
+          "status": null
+        }
+      ]
+    },
+    {
+      "structuralHash": "7f2a6326",
+      "actions": [
+        {
+          "kind": "click",
+          "ref": "1",
+          "value": "Apply",
+          "enter": null,
+          "seconds": null,
+          "reason": "Clicking 'Apply' to open the form for filling out.",
+          "status": null,
+          "sig": "b7995e75"
+        }
+      ]
+    },
+    {
+      "structuralHash": "8e1ac09b",
+      "actions": [
+        {
+          "kind": "fill",
+          "ref": "2",
+          "value": "I am interested in applying for the Software Engineer position.",
+          "enter": true,
+          "seconds": 1,
+          "reason": "Filling in the reason for contacting.",
+          "status": null,
+          "sig": "499dcc68"
+        }
+      ]
+    }
+  ]
+}

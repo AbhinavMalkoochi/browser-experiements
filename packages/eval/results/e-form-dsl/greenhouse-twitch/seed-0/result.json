@@ -1,0 +1,41 @@
+{
+  "approach": "e-form-dsl",
+  "description": "Novel: Form DSL compiler — one LLM call per page emits a typed FormSpec; interpreter executes.",
+  "taskId": "greenhouse-twitch",
+  "seed": 0,
+  "startedAt": 1776389789294,
+  "finishedAt": 1776389846616,
+  "durationMs": 57322,
+  "stepsTaken": 1,
+  "actionsExecuted": 26,
+  "totalLlmCalls": 1,
+  "totalInputTokens": 2537,
+  "totalOutputTokens": 613,
+  "totalCostUsd": 0.0007483500000000001,
+  "finalUrl": "https://job-boards.greenhouse.io/twitch/jobs/8447271002?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": false,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 3,
+    "requiredFieldsTotal": 9,
+    "missing": [
+      "First Name*",
+      "Country*",
+      "Location (City)*",
+      "Are you open to relocation? *",
+      "Your response is mandatory when applying for a U.S.-based position. Do you need, or will you need in the future, any immigration related support or sponsorship from Amazon in order to begin or continue employment with Amazon? *",
+      "In which country/region do you have citizenship?*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.33 filled=3/9 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/greenhouse-twitch/seed-0/final.png"
+  },
+  "failureMode": "partial_filled",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/e-form-dsl/greenhouse-twitch/seed-0"
+}

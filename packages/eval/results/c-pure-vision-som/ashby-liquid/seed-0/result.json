@@ -1,0 +1,36 @@
+{
+  "approach": "c-pure-vision-som",
+  "description": "Pure vision + Set-of-Marks: numbered-box screenshot, no DOM text fed to LLM.",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776388746943,
+  "finishedAt": 1776388769240,
+  "durationMs": 22297,
+  "stepsTaken": 5,
+  "actionsExecuted": 6,
+  "totalLlmCalls": 5,
+  "totalInputTokens": 10978,
+  "totalOutputTokens": 601,
+  "totalCostUsd": 0.033455,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 4,
+    "requiredFieldsTotal": 5,
+    "missing": [
+      "Explain one of your favorite projects, and why it was exceptional to you."
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.80 filled=4/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/c-pure-vision-som/ashby-liquid/seed-0"
+}

@@ -1,0 +1,33 @@
+{
+  "approach": "h-rmcts-lite",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776380084428,
+  "finishedAt": 1776380108824,
+  "durationMs": 24396,
+  "stepsTaken": 2,
+  "actionsExecuted": 10,
+  "totalLlmCalls": 1,
+  "totalInputTokens": 1399,
+  "totalOutputTokens": 455,
+  "totalCostUsd": 0.00048285,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 6,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=6/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/h-rmcts-lite/ashby-mirage/seed-0"
+}

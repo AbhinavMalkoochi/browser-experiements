@@ -1,0 +1,42 @@
+{
+  "approach": "n-replay-canonical",
+  "description": "Phase 1 family D: canonical observation + replay/diff reuse.",
+  "taskId": "greenhouse-ispottv",
+  "seed": 0,
+  "startedAt": 1776389773587,
+  "finishedAt": 1776389958735,
+  "durationMs": 185148,
+  "stepsTaken": 6,
+  "actionsExecuted": 10,
+  "totalLlmCalls": 3,
+  "totalInputTokens": 5970,
+  "totalOutputTokens": 599,
+  "totalCostUsd": 0.0012549,
+  "finalUrl": "https://job-boards.greenhouse.io/ispottv/jobs/4684929005?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "iSpot cannot support visa sponsorships or transfers for this role. Please confirm you do not need visa sponsorship.*"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.83 filled=5/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/n-replay-canonical/greenhouse-ispottv/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/n-replay-canonical/greenhouse-ispottv/seed-0",
+  "experiment": {
+    "family": "family_d_replay",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "replay_diff"
+  }
+}

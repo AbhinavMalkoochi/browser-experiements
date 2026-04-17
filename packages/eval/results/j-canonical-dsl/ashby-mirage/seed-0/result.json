@@ -1,0 +1,42 @@
+{
+  "approach": "j-canonical-dsl",
+  "description": "Phase 1 family A: canonical observation + typed DSL executor.",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776389463968,
+  "finishedAt": 1776389552739,
+  "durationMs": 88771,
+  "stepsTaken": 6,
+  "actionsExecuted": 6,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 11585,
+  "totalOutputTokens": 727,
+  "totalCostUsd": 0.00217395,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "budget_exceeded",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "Resume"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.83 filled=5/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": "budget_exceeded",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/j-canonical-dsl/ashby-mirage/seed-0",
+  "experiment": {
+    "family": "family_a_canonical",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "local_verify"
+  }
+}

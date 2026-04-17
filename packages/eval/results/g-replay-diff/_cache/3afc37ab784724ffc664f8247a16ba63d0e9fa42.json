@@ -1,0 +1,36 @@
+{
+  "urlPattern": "abbott.wd5.myworkdayjobs.com/en-US/abbottcareers/job/United-States---Minnesota---St-Paul/Software-Verification-Engineer-I_*",
+  "createdAt": 1776389463180,
+  "steps": [
+    {
+      "structuralHash": "1cb2a622",
+      "actions": [
+        {
+          "kind": "click",
+          "ref": "6",
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Clicking the Apply button to proceed to the application form.",
+          "status": null,
+          "sig": "1f8c0132"
+        }
+      ]
+    },
+    {
+      "structuralHash": "5b2b8ab1",
+      "actions": [
+        {
+          "kind": "click",
+          "ref": "7",
+          "value": null,
+          "enter": null,
+          "seconds": null,
+          "reason": "Clicking the Apply button to begin the application process.",
+          "status": null,
+          "sig": "1f8c0132"
+        }
+      ]
+    }
+  ]
+}

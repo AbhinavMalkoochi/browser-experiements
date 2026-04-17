@@ -1,0 +1,40 @@
+{
+  "approach": "l-hybrid-vision",
+  "description": "Phase 1 family C: canonical observation with selective vision fallback.",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776388230850,
+  "finishedAt": 1776388249910,
+  "durationMs": 19060,
+  "stepsTaken": 2,
+  "actionsExecuted": 6,
+  "totalLlmCalls": 2,
+  "totalInputTokens": 2940,
+  "totalOutputTokens": 372,
+  "totalCostUsd": 0.0006642,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/l-hybrid-vision/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/l-hybrid-vision/ashby-liquid/seed-0",
+  "experiment": {
+    "family": "family_c_hybrid",
+    "observationMode": "canonical",
+    "plannerMode": "single_loop",
+    "recoveryMode": "selective_vision"
+  }
+}

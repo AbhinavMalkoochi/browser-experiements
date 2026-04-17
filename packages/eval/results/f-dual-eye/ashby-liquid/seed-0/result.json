@@ -1,0 +1,33 @@
+{
+  "approach": "f-dual-eye",
+  "taskId": "ashby-liquid",
+  "seed": 0,
+  "startedAt": 1776378268161,
+  "finishedAt": 1776378321089,
+  "durationMs": 52928,
+  "stepsTaken": 9,
+  "actionsExecuted": 8,
+  "totalLlmCalls": 23,
+  "totalInputTokens": 51787,
+  "totalOutputTokens": 2168,
+  "totalCostUsd": 0.05110564999999999,
+  "finalUrl": "https://jobs.ashbyhq.com/liquid/7b47044b-4b81-44b4-8986-ea5eaaa85c27/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 5,
+    "requiredFieldsTotal": 5,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=5/5 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/ashby-liquid/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/ashby-liquid/seed-0"
+}

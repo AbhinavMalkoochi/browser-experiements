@@ -1,0 +1,41 @@
+{
+  "approach": "a-stagehand",
+  "description": "Stagehand hybrid (AX+DOM) with act/observe primitives — proven baseline.",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776388346675,
+  "finishedAt": 1776388356869,
+  "durationMs": 10194,
+  "stepsTaken": 0,
+  "actionsExecuted": 0,
+  "totalLlmCalls": 1,
+  "totalInputTokens": 12000,
+  "totalOutputTokens": 0,
+  "totalCostUsd": 0.0018,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 6,
+    "missing": [
+      "Preferred Name",
+      "Email",
+      "Phone",
+      "Resume",
+      "Share something you’ve built that you’re proud of. Include links (GitHub, apps, demos, papers, etc), and clearly describe your specific contributions.",
+      "Which of the following areas are you most excited to contribute to here: iOS, Web-Product, Backend/Platform, Applied AI?"
+    ],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/a-stagehand/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": "partial_filled",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/a-stagehand/ashby-mirage/seed-0"
+}

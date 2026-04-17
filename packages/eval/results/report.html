@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1>Best-job-agent eval report</h1>
-<p class="muted">Generated 2026-04-16T20:21:45.705Z · 25 runs · total cost $0.0836</p>
+<p class="muted">Generated 2026-04-17T02:22:06.487Z · 10 runs · total cost $0.0125</p>
 
 <h2>Approach leaderboard (sorted by ready-rate, then success, then cost)</h2>
 <table>
@@ -29,226 +29,103 @@
   </tr></thead>
   <tbody>
   <tr>
-      <td><b>b-axtree-indexed</b></td>
-      <td class="num">5</td>
-      <td class="num">60%</td>
-      <td class="num">60%</td>
-      <td class="num">109.6</td>
-      <td class="num">32.0</td>
-      <td class="num">92.0</td>
-      <td class="num">0.0022</td>
-      <td class="num">6.2</td>
-      <td class="num">5.6</td>
-      <td class="num">9.6</td>
-      <td><span class="badge">form_not_loaded:1</span><span class="badge">timeout:1</span></td>
-    </tr>
-<tr>
-      <td><b>h-rmcts-lite</b></td>
-      <td class="num">5</td>
-      <td class="num">60%</td>
-      <td class="num">60%</td>
-      <td class="num">75.0</td>
-      <td class="num">51.7</td>
-      <td class="num">74.2</td>
-      <td class="num">0.0033</td>
-      <td class="num">6.4</td>
-      <td class="num">5.6</td>
-      <td class="num">13.2</td>
-      <td><span class="badge">budget_exceeded:2</span></td>
-    </tr>
-<tr>
-      <td><b>e-form-dsl</b></td>
-      <td class="num">5</td>
-      <td class="num">0%</td>
-      <td class="num">60%</td>
-      <td class="num">165.1</td>
-      <td class="num">103.6</td>
-      <td class="num">306.9</td>
+      <td><b>k-canonical-state</b></td>
+      <td class="num">10</td>
+      <td class="num">40%</td>
+      <td class="num">40%</td>
+      <td class="num">80.3</td>
+      <td class="num">48.7</td>
+      <td class="num">184.0</td>
       <td class="num">0.0013</td>
-      <td class="num">2.2</td>
-      <td class="num">0.8</td>
-      <td class="num">8.2</td>
-      <td><span class="badge">partial_filled:2</span><span class="badge">form_not_loaded:1</span><span class="badge">timeout:2</span></td>
+      <td class="num">3.5</td>
+      <td class="num">2.6</td>
+      <td class="num">7.2</td>
+      <td><span class="badge">aborted:2</span><span class="badge">timeout:2</span><span class="badge">budget_exceeded:2</span></td>
     </tr>
-<tr>
-      <td><b>d-hierarchical</b></td>
-      <td class="num">5</td>
-      <td class="num">40%</td>
-      <td class="num">40%</td>
-      <td class="num">64.5</td>
-      <td class="num">41.5</td>
-      <td class="num">59.3</td>
-      <td class="num">0.0073</td>
-      <td class="num">6.4</td>
-      <td class="num">6.2</td>
-      <td class="num">10.6</td>
-      <td><span class="badge">partial_filled:2</span><span class="badge">form_not_loaded:1</span></td>
-    </tr>
-<tr>
-      <td><b>g-replay-diff</b></td>
-      <td class="num">5</td>
-      <td class="num">20%</td>
-      <td class="num">20%</td>
-      <td class="num">128.6</td>
-      <td class="num">94.0</td>
-      <td class="num">157.5</td>
-      <td class="num">0.0027</td>
-      <td class="num">5.6</td>
-      <td class="num">4.6</td>
-      <td class="num">11.6</td>
-      <td><span class="badge">budget_exceeded:3</span><span class="badge">timeout:1</span></td>
-    </tr>
+  </tbody>
+</table>
+
+<h2>Family leaderboard</h2>
+<table>
+  <thead><tr><th>Family</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th><th class="num">Med dur (s)</th><th class="num">Avg cost ($)</th></tr></thead>
+  <tbody>
+  <tr><td>family_b_field_state</td><td class="num">10</td><td class="num">40%</td><td class="num">40%</td><td class="num">48.7</td><td class="num">0.0013</td></tr>
+  </tbody>
+</table>
+
+<h2>Observation-mode leaderboard</h2>
+<table>
+  <thead><tr><th>Mode</th><th class="num">Runs</th><th class="num">Success</th><th class="num">Ready</th><th class="num">Med dur (s)</th><th class="num">Avg cost ($)</th></tr></thead>
+  <tbody>
+  <tr><td>canonical</td><td class="num">10</td><td class="num">40%</td><td class="num">40%</td><td class="num">48.7</td><td class="num">0.0013</td></tr>
+  </tbody>
+</table>
+
+<h2>Repeatability</h2>
+<table>
+  <thead><tr><th>Approach</th><th class="num">Task groups</th><th class="num">Repeat success</th><th class="num">Repeat ready</th></tr></thead>
+  <tbody>
+  <tr><td>k-canonical-state</td><td class="num">10</td><td class="num">40%</td><td class="num">40%</td></tr>
   </tbody>
 </table>
 
 <h2>Per-task heatmap (cells: success/total · ready/total)</h2>
 <table>
-  <thead><tr><th>Approach</th><th>applytojob-genalyte</th><th>ashby-liquid</th><th>greenhouse-ispottv</th><th>lever-whoop</th><th>workable-optisigns</th></tr></thead>
+  <thead><tr><th>Approach</th><th>applytojob-genalyte</th><th>ashby-liquid</th><th>ashby-mirage</th><th>greenhouse-ispottv</th><th>greenhouse-tradedesk</th><th>greenhouse-twitch</th><th>lever-whoop</th><th>smartrecruiters-krg</th><th>workable-optisigns</th><th>workday-abbott</th></tr></thead>
   <tbody>
   <tr>
-      <td><b>b-axtree-indexed</b></td>
-      <td title="status=form_not_loaded
-cost=$0.0046
-duration=92.0s
-steps=15
-llm=14
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0009
-duration=19.4s
-steps=4
-llm=3
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=success
-cost=$0.0012
-duration=30.8s
-steps=4
-llm=3
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=timeout
-cost=$0.0029
-duration=373.5s
-steps=0
-llm=7
-evidence=ratio=0.70 filled=7/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0013
-duration=32.0s
-steps=5
-llm=4
-evidence=ratio=1.00 filled=6/6 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td>
-    </tr>
-<tr>
-      <td><b>h-rmcts-lite</b></td>
+      <td><b>k-canonical-state</b></td>
       <td title="status=budget_exceeded
-cost=$0.0057
-duration=74.2s
-steps=7
-llm=10
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0036
-duration=51.7s
-steps=7
-llm=8
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=success
-cost=$0.0009
-duration=48.8s
-steps=3
-llm=2
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=budget_exceeded
-cost=$0.0050
-duration=165.8s
-steps=6
-llm=8
-evidence=ratio=0.40 filled=4/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0011
-duration=34.6s
-steps=5
-llm=4
-evidence=ratio=0.86 filled=6/7 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td>
-    </tr>
-<tr>
-      <td><b>e-form-dsl</b></td>
-      <td title="status=ready
-cost=$0.0008
-duration=32.9s
-steps=2
-llm=2
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#65a30d">0/1 · 1/1r</span></td><td title="status=timeout
-cost=$0.0030
-duration=343.8s
-steps=0
-llm=5
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=ready
-cost=$0.0005
-duration=38.2s
-steps=1
-llm=1
-evidence=ratio=0.56 filled=5/9 submit=true/true submittedLike=false"><span class="cell" style="background:#65a30d">0/1 · 1/1r</span></td><td title="status=ready
-cost=$0.0006
-duration=103.6s
-steps=1
-llm=1
-evidence=ratio=0.60 filled=6/10 submit=true/true submittedLike=false"><span class="cell" style="background:#65a30d">0/1 · 1/1r</span></td><td title="status=timeout
-cost=$0.0016
-duration=306.9s
-steps=0
-llm=2
-evidence=ratio=0.00 filled=0/0 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td>
-    </tr>
-<tr>
-      <td><b>d-hierarchical</b></td>
-      <td title="status=form_not_loaded
-cost=$0.0083
-duration=39.7s
-steps=9
-llm=9
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0051
-duration=22.3s
-steps=3
-llm=4
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=success
-cost=$0.0068
-duration=41.5s
-steps=4
-llm=4
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=partial_filled
-cost=$0.0099
-duration=159.6s
-steps=7
-llm=7
-evidence=ratio=0.70 filled=7/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=partial_filled
-cost=$0.0061
-duration=59.3s
-steps=8
-llm=8
-evidence=ratio=1.00 filled=6/6 submit=true/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td>
-    </tr>
-<tr>
-      <td><b>g-replay-diff</b></td>
-      <td title="status=budget_exceeded
-cost=$0.0029
-duration=94.0s
-steps=9
-llm=8
-evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=budget_exceeded
-cost=$0.0018
-duration=40.7s
-steps=4
-llm=3
-evidence=ratio=0.00 filled=0/0 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
-cost=$0.0025
-duration=157.5s
+cost=$0.0022
+duration=91.9s
 steps=6
 llm=6
-evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=timeout
-cost=$0.0048
-duration=311.1s
-steps=0
-llm=8
-evidence=ratio=0.70 filled=7/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=budget_exceeded
-cost=$0.0018
-duration=39.5s
-steps=4
+evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
+cost=$0.0006
+duration=14.2s
+steps=2
+llm=2
+evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=success
+cost=$0.0007
+duration=18.4s
+steps=2
+llm=2
+evidence=ratio=1.00 filled=6/6 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=success
+cost=$0.0011
+duration=131.1s
+steps=3
 llm=3
-evidence=ratio=0.00 filled=0/0 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td>
+evidence=ratio=1.00 filled=5/5 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=timeout
+cost=$0.0018
+duration=184.0s
+steps=0
+llm=4
+evidence=ratio=0.40 filled=4/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=aborted
+cost=$0.0010
+duration=71.0s
+steps=2
+llm=2
+evidence=ratio=0.17 filled=3/18 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=timeout
+cost=$0.0023
+duration=209.6s
+steps=0
+llm=5
+evidence=ratio=0.70 filled=7/10 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=budget_exceeded
+cost=$0.0015
+duration=26.9s
+steps=6
+llm=6
+evidence=ratio=0.00 filled=0/0 submit=true/true submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td><td title="status=success
+cost=$0.0010
+duration=48.7s
+steps=3
+llm=3
+evidence=ratio=1.00 filled=6/6 submit=true/true submittedLike=false"><span class="cell" style="background:#16a34a">1/1 · 1/1r</span></td><td title="status=aborted
+cost=$0.0004
+duration=6.7s
+steps=2
+llm=2
+evidence=ratio=0.00 filled=0/0 submit=false/false submittedLike=false"><span class="cell" style="background:#ef4444">0/1 · 0/1r</span></td>
     </tr>
   </tbody>
 </table>
@@ -258,333 +135,158 @@ evidence=ratio=0.00 filled=0/0 submit=true/true submittedLike=false"><span class
   <thead><tr>
     <th>Approach</th><th>Task</th><th>Seed</th><th>Success</th><th>Ready</th>
     <th class="num">Dur (s)</th><th class="num">Cost ($)</th><th class="num">LLM</th><th class="num">Steps</th>
-    <th>Failure</th><th>Evidence</th>
+    <th>Mode</th><th>Family</th><th>Failure</th><th>Evidence</th>
   </tr></thead>
   <tbody>
   <tr>
-      <td>b-axtree-indexed</td>
+      <td>k-canonical-state</td>
       <td>ashby-liquid</td>
       <td>0</td>
       <td>✓</td>
       <td>✓</td>
-      <td class="num">19.4</td>
-      <td class="num">0.0009</td>
-      <td class="num">3</td>
-      <td class="num">4</td>
+      <td class="num">14.2</td>
+      <td class="num">0.0006</td>
+      <td class="num">2</td>
+      <td class="num">2</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
       <td></td>
       <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
     </tr>
 <tr>
-      <td>b-axtree-indexed</td>
-      <td>greenhouse-ispottv</td>
+      <td>k-canonical-state</td>
+      <td>ashby-mirage</td>
       <td>0</td>
       <td>✓</td>
       <td>✓</td>
-      <td class="num">30.8</td>
-      <td class="num">0.0012</td>
-      <td class="num">3</td>
-      <td class="num">4</td>
-      <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>b-axtree-indexed</td>
-      <td>workable-optisigns</td>
-      <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">32.0</td>
-      <td class="num">0.0013</td>
-      <td class="num">4</td>
-      <td class="num">5</td>
+      <td class="num">18.4</td>
+      <td class="num">0.0007</td>
+      <td class="num">2</td>
+      <td class="num">2</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
       <td></td>
       <td class="muted">ratio=1.00 filled=6/6 submit=true/true submittedLike=false</td>
     </tr>
 <tr>
-      <td>d-hierarchical</td>
-      <td>ashby-liquid</td>
+      <td>k-canonical-state</td>
+      <td>greenhouse-twitch</td>
       <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">22.3</td>
-      <td class="num">0.0051</td>
-      <td class="num">4</td>
-      <td class="num">3</td>
       <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
+      <td></td>
+      <td class="num">71.0</td>
+      <td class="num">0.0010</td>
+      <td class="num">2</td>
+      <td class="num">2</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
+      <td>aborted</td>
+      <td class="muted">ratio=0.17 filled=3/18 submit=true/true submittedLike=false</td>
     </tr>
 <tr>
-      <td>d-hierarchical</td>
+      <td>k-canonical-state</td>
       <td>greenhouse-ispottv</td>
       <td>0</td>
       <td>✓</td>
       <td>✓</td>
-      <td class="num">41.5</td>
-      <td class="num">0.0068</td>
-      <td class="num">4</td>
-      <td class="num">4</td>
-      <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>b-axtree-indexed</td>
-      <td>applytojob-genalyte</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">92.0</td>
-      <td class="num">0.0046</td>
-      <td class="num">14</td>
-      <td class="num">15</td>
-      <td>form_not_loaded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>d-hierarchical</td>
-      <td>workable-optisigns</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">59.3</td>
-      <td class="num">0.0061</td>
-      <td class="num">8</td>
-      <td class="num">8</td>
-      <td>partial_filled</td>
-      <td class="muted">ratio=1.00 filled=6/6 submit=true/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>d-hierarchical</td>
-      <td>applytojob-genalyte</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">39.7</td>
-      <td class="num">0.0083</td>
-      <td class="num">9</td>
-      <td class="num">9</td>
-      <td>form_not_loaded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>e-form-dsl</td>
-      <td>greenhouse-ispottv</td>
-      <td>0</td>
-      <td></td>
-      <td>✓</td>
-      <td class="num">38.2</td>
-      <td class="num">0.0005</td>
-      <td class="num">1</td>
-      <td class="num">1</td>
-      <td>partial_filled</td>
-      <td class="muted">ratio=0.56 filled=5/9 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>d-hierarchical</td>
-      <td>lever-whoop</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">159.6</td>
-      <td class="num">0.0099</td>
-      <td class="num">7</td>
-      <td class="num">7</td>
-      <td>partial_filled</td>
-      <td class="muted">ratio=0.70 filled=7/10 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>e-form-dsl</td>
-      <td>lever-whoop</td>
-      <td>0</td>
-      <td></td>
-      <td>✓</td>
-      <td class="num">103.6</td>
-      <td class="num">0.0006</td>
-      <td class="num">1</td>
-      <td class="num">1</td>
-      <td>partial_filled</td>
-      <td class="muted">ratio=0.60 filled=6/10 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>e-form-dsl</td>
-      <td>applytojob-genalyte</td>
-      <td>0</td>
-      <td></td>
-      <td>✓</td>
-      <td class="num">32.9</td>
-      <td class="num">0.0008</td>
-      <td class="num">2</td>
-      <td class="num">2</td>
-      <td>form_not_loaded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>g-replay-diff</td>
-      <td>ashby-liquid</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">40.7</td>
-      <td class="num">0.0018</td>
-      <td class="num">3</td>
-      <td class="num">4</td>
-      <td>budget_exceeded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>b-axtree-indexed</td>
-      <td>lever-whoop</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">373.5</td>
-      <td class="num">0.0029</td>
-      <td class="num">7</td>
-      <td class="num">0</td>
-      <td>timeout</td>
-      <td class="muted">ratio=0.70 filled=7/10 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>e-form-dsl</td>
-      <td>ashby-liquid</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">343.8</td>
-      <td class="num">0.0030</td>
-      <td class="num">5</td>
-      <td class="num">0</td>
-      <td>timeout</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>g-replay-diff</td>
-      <td>workable-optisigns</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">39.5</td>
-      <td class="num">0.0018</td>
-      <td class="num">3</td>
-      <td class="num">4</td>
-      <td>budget_exceeded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>e-form-dsl</td>
-      <td>workable-optisigns</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">306.9</td>
-      <td class="num">0.0016</td>
-      <td class="num">2</td>
-      <td class="num">0</td>
-      <td>timeout</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>g-replay-diff</td>
-      <td>greenhouse-ispottv</td>
-      <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">157.5</td>
-      <td class="num">0.0025</td>
-      <td class="num">6</td>
-      <td class="num">6</td>
-      <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>h-rmcts-lite</td>
-      <td>ashby-liquid</td>
-      <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">51.7</td>
-      <td class="num">0.0036</td>
-      <td class="num">8</td>
-      <td class="num">7</td>
-      <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>h-rmcts-lite</td>
-      <td>greenhouse-ispottv</td>
-      <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">48.8</td>
-      <td class="num">0.0009</td>
-      <td class="num">2</td>
-      <td class="num">3</td>
-      <td></td>
-      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
-    </tr>
-<tr>
-      <td>g-replay-diff</td>
-      <td>applytojob-genalyte</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">94.0</td>
-      <td class="num">0.0029</td>
-      <td class="num">8</td>
-      <td class="num">9</td>
-      <td>budget_exceeded</td>
-      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>h-rmcts-lite</td>
-      <td>workable-optisigns</td>
-      <td>0</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td class="num">34.6</td>
+      <td class="num">131.1</td>
       <td class="num">0.0011</td>
-      <td class="num">4</td>
-      <td class="num">5</td>
+      <td class="num">3</td>
+      <td class="num">3</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
       <td></td>
-      <td class="muted">ratio=0.86 filled=6/7 submit=true/true submittedLike=false</td>
+      <td class="muted">ratio=1.00 filled=5/5 submit=true/true submittedLike=false</td>
     </tr>
 <tr>
-      <td>g-replay-diff</td>
+      <td>k-canonical-state</td>
+      <td>greenhouse-tradedesk</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td class="num">184.0</td>
+      <td class="num">0.0018</td>
+      <td class="num">4</td>
+      <td class="num">0</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
+      <td>timeout</td>
+      <td class="muted">ratio=0.40 filled=4/10 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>k-canonical-state</td>
+      <td>workable-optisigns</td>
+      <td>0</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td class="num">48.7</td>
+      <td class="num">0.0010</td>
+      <td class="num">3</td>
+      <td class="num">3</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
+      <td></td>
+      <td class="muted">ratio=1.00 filled=6/6 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>k-canonical-state</td>
+      <td>smartrecruiters-krg</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td class="num">26.9</td>
+      <td class="num">0.0015</td>
+      <td class="num">6</td>
+      <td class="num">6</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
+      <td>budget_exceeded</td>
+      <td class="muted">ratio=0.00 filled=0/0 submit=true/true submittedLike=false</td>
+    </tr>
+<tr>
+      <td>k-canonical-state</td>
       <td>lever-whoop</td>
       <td>0</td>
       <td></td>
       <td></td>
-      <td class="num">311.1</td>
-      <td class="num">0.0048</td>
-      <td class="num">8</td>
+      <td class="num">209.6</td>
+      <td class="num">0.0023</td>
+      <td class="num">5</td>
       <td class="num">0</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
       <td>timeout</td>
       <td class="muted">ratio=0.70 filled=7/10 submit=true/true submittedLike=false</td>
     </tr>
 <tr>
-      <td>h-rmcts-lite</td>
+      <td>k-canonical-state</td>
+      <td>workday-abbott</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td class="num">6.7</td>
+      <td class="num">0.0004</td>
+      <td class="num">2</td>
+      <td class="num">2</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
+      <td>aborted</td>
+      <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
+    </tr>
+<tr>
+      <td>k-canonical-state</td>
       <td>applytojob-genalyte</td>
       <td>0</td>
       <td></td>
       <td></td>
-      <td class="num">74.2</td>
-      <td class="num">0.0057</td>
-      <td class="num">10</td>
-      <td class="num">7</td>
+      <td class="num">91.9</td>
+      <td class="num">0.0022</td>
+      <td class="num">6</td>
+      <td class="num">6</td>
+      <td>canonical</td>
+      <td>family_b_field_state</td>
       <td>budget_exceeded</td>
       <td class="muted">ratio=0.00 filled=0/0 submit=false/false submittedLike=false</td>
-    </tr>
-<tr>
-      <td>h-rmcts-lite</td>
-      <td>lever-whoop</td>
-      <td>0</td>
-      <td></td>
-      <td></td>
-      <td class="num">165.8</td>
-      <td class="num">0.0050</td>
-      <td class="num">8</td>
-      <td class="num">6</td>
-      <td>budget_exceeded</td>
-      <td class="muted">ratio=0.40 filled=4/10 submit=true/true submittedLike=false</td>
     </tr>
   </tbody>
 </table>

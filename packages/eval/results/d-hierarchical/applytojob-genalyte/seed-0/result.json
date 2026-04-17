@@ -1,18 +1,19 @@
 {
   "approach": "d-hierarchical",
+  "description": "Hierarchical planner (big model) + tiny executor + change-observer verifier.",
   "taskId": "applytojob-genalyte",
   "seed": 0,
-  "startedAt": 1776370278569,
-  "finishedAt": 1776370318251,
-  "durationMs": 39682,
-  "stepsTaken": 9,
-  "actionsExecuted": 13,
-  "totalLlmCalls": 9,
-  "totalInputTokens": 15786,
-  "totalOutputTokens": 1127,
-  "totalCostUsd": 0.0083222,
+  "startedAt": 1776389639022,
+  "finishedAt": 1776389673275,
+  "durationMs": 34253,
+  "stepsTaken": 5,
+  "actionsExecuted": 12,
+  "totalLlmCalls": 6,
+  "totalInputTokens": 10278,
+  "totalOutputTokens": 925,
+  "totalCostUsd": 0.0075252,
   "finalUrl": "https://genalyte.applytojob.com/apply/ms4az9EW8x/Software-Engineer-I?utm_source=Simplify&ref=Simplify",
-  "finalStatus": "aborted",
+  "finalStatus": "budget_exceeded",
   "success": false,
   "readyToSubmit": false,
   "verifier": {
@@ -27,7 +28,7 @@
     "classification": "form_not_loaded",
     "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/applytojob-genalyte/seed-0/final.png"
   },
-  "failureMode": "form_not_loaded",
+  "failureMode": "budget_exceeded",
   "error": null,
   "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/d-hierarchical/applytojob-genalyte/seed-0"
 }

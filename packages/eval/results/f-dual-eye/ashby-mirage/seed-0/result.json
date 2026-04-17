@@ -1,0 +1,33 @@
+{
+  "approach": "f-dual-eye",
+  "taskId": "ashby-mirage",
+  "seed": 0,
+  "startedAt": 1776378321775,
+  "finishedAt": 1776378376540,
+  "durationMs": 54765,
+  "stepsTaken": 9,
+  "actionsExecuted": 8,
+  "totalLlmCalls": 20,
+  "totalInputTokens": 42453,
+  "totalOutputTokens": 2617,
+  "totalCostUsd": 0.049909150000000006,
+  "finalUrl": "https://jobs.ashbyhq.com/mirage/1c4a937b-894e-402a-b2fd-93435b86657f/application?utm_source=Simplify&ref=Simplify",
+  "finalStatus": "done",
+  "success": true,
+  "readyToSubmit": true,
+  "verifier": {
+    "success": true,
+    "readyToSubmit": true,
+    "requiredFieldsFilled": 6,
+    "requiredFieldsTotal": 6,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=1.00 filled=6/6 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/ashby-mirage/seed-0/final.png"
+  },
+  "failureMode": null,
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/ashby-mirage/seed-0"
+}

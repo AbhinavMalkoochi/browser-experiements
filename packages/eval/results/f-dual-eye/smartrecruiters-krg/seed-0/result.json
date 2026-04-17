@@ -1,0 +1,33 @@
+{
+  "approach": "f-dual-eye",
+  "taskId": "smartrecruiters-krg",
+  "seed": 0,
+  "startedAt": 1776378930247,
+  "finishedAt": 1776378952229,
+  "durationMs": 21982,
+  "stepsTaken": 3,
+  "actionsExecuted": 2,
+  "totalLlmCalls": 8,
+  "totalInputTokens": 15784,
+  "totalOutputTokens": 921,
+  "totalCostUsd": 0.018580600000000003,
+  "finalUrl": "https://jobs.smartrecruiters.com/oneclick-ui/company/KrgTechnologyInc/publication/d6125dc9-e6cd-4650-89db-3469b9a1fc48?dcr_ci=KrgTechnologyInc",
+  "finalStatus": "aborted",
+  "success": false,
+  "readyToSubmit": false,
+  "verifier": {
+    "success": false,
+    "readyToSubmit": false,
+    "requiredFieldsFilled": 0,
+    "requiredFieldsTotal": 0,
+    "missing": [],
+    "submitButtonFound": true,
+    "submitButtonEnabled": true,
+    "evidence": "ratio=0.00 filled=0/0 submit=true/true submittedLike=false",
+    "classification": "partial_filled",
+    "screenshotPath": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/smartrecruiters-krg/seed-0/final.png"
+  },
+  "failureMode": "aborted",
+  "error": null,
+  "artifactDir": "/home/abhinav/projects/best-job-agent/packages/eval/results/f-dual-eye/smartrecruiters-krg/seed-0"
+}
